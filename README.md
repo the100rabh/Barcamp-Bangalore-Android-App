@@ -1,6 +1,10 @@
 # Barcamp Bangalore Android App
 
-This is the Android app I had created for Barcamp Bangalore. The live version of the same is available at https://market.android.com/details?id=com.bangalore.barcamp All icons and design are credited to @karthik(http://twitter.com/karthik), code is available under APL. For more info read the LICENCE file.
+This is the Android app I had created for Barcamp Bangalore. 
+
+The live version of the same is available at https://market.android.com/details?id=com.bangalore.barcamp 
+
+All icons and design are credited to [@karthik](http://twitter.com/karthik), code is available under APL. For more info read the LICENCE file.
 
 ## Aim
 
@@ -31,7 +35,7 @@ Go ahead do it.
 * Also replace the link to get the xml from barcampbangalore's website to your own. 
 * Change the notification message location from barcampbangalore twitter stream to your own
 * Change the venue to your own.
-* Drop in a mail at [Barcamp Bangalore Mailing list](http://tech.groups.yahoo.com/group/bangalore_barcamp/) or tweet to @barcampbng(http://twitter.com/barcampbng)
+* Drop in a mail at [Barcamp Bangalore Mailing list](http://tech.groups.yahoo.com/group/bangalore_barcamp/) or tweet to [@barcampbng](http://twitter.com/barcampbng)
 
 # Want to contribute?
 
@@ -43,7 +47,7 @@ One fix per commit. If say a a commit closes the open issue 12. Just add `closes
 
 All code that is contributed must be compliant with [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
 
-For any questions that you have regards to this pleas shoot in a mail at Barcamp Bangalore Mailing List(http://tech.groups.yahoo.com/group/bangalore_barcamp/)
+For any questions that you have regards to this pleas shoot in a mail at [Barcamp Bangalore Mailing List](http://tech.groups.yahoo.com/group/bangalore_barcamp/)
 
 ## Code Style Guidelines
 
