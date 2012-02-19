@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, BarcampBangaloreSplashApp!</string>
+    <string name="app_name">Barcamp Bangalore</string>
+    <string name="session">Sessions</string>
+    <string name="tweets">TWEETS</string>
+    <string name="about">ABOUT</string>
+    <string name="bcb_updates">BCB Updates</string>
+    <string name="connection_error_and_try_again">Connection Error!! Check if you have internet connectivity and try again.</string>
+    <string name="ok">OK</string>
+    <string name="error_title">Error!!!</string>
+    <string name="loading">Loading…</string>
+    <string name="choose_app">Choose an App</string>
+    <string name="share_using">Share Using…</string>
+    <string name="message_hint">type your message here…</string>
+    <string name="app_title_text">BARCAMP BANGALORE 11</string>
+    <string name="about_message">Its been around five years now since Bangalore 
+        saw its first Barcamp. Over this period, the city’s flagship technology unconference
+        has brought together hundreds of professionals who have participated in dozens of
+         sessions to share their insights on cutting edge technologies.\n\n
+         
+		With the success of the Barcamp format, we have seen the emergence of several other
+		exciting unconferences targeting a range of technology niches. In this changed
+		context, we are seeking to create a uniquely useful space for geeks to come
+		together while perfectly complementing similar events in the city.\n\n
+		
+		For BCB, we request that participants submit topics prior to the event to
+		ensure that a majority of a session is devoted discussions. We also hope 
+		that BCB’s venue at SAP Labs will encourage spontaneous and open-ended 
+		interaction among participants like last time.\n\n
+		Head to http://barcampbangalore.org for more info.    </string>
+    <string name="notification_settings_text">Notification (Will check for updates every 10mins)</string>
+    <string name="agenda">AGENDA</string>
+    <string name="updates">UPDATES</string>
+    <string name="venue">VENUE</string>
+    <string name="alert_me_10_mins_before_start">Alert me 10 mins before start</string>
+    <string name="share_now">Share Now</string>
+    <string name="no_session">Slow down buddy\n\nNo sessions registered for this slot yet.\n\nPlease come back again</string>
+
+</resources>

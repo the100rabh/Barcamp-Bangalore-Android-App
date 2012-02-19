@@ -1,0 +1,271 @@
+<barcamp-data>
+	<slot id="1" startTime="800" endTime="900" type="fixed" name="Registrations"/>
+	<slot id="2" startTime="900" endTime="930" type="fixed" name="Intro to Barcamp"/>
+	<slot id="3" startTime="930" endTime="1030" type="session" name="Slot 1">
+		<session>
+			<id>1</id>
+			<time>9:30am to 10:30am </time>
+			<title>FLASK+PYTHON</title>
+			<presenter>Krace Kumar</presenter>
+			<location>ASSEMBLY</location>
+		</session>
+		<session>
+			<id>2</id>
+			<time>9:30am to 10:30am </time>
+			<title>Some Title B</title>
+			<presenter> Some Guy B</presenter>
+			<location>BASIC</location>
+		</session>
+		<session>
+			<id>3</id>
+			<time>9:30am to 10:30am </time>
+			<title>Mobile Analytics+Cross APP</title>
+			<presenter>VIVEK</presenter>
+			<location>COBOL</location>
+		</session>
+		<session>
+			<id>4</id>
+			<time>9:30am to 10:30am </time>
+			<title>Startups</title>
+			<presenter>Smarpeet</presenter>
+			<location>DELPHI</location>
+		</session>
+		<session>
+			<id>5</id>
+			<time>9:30am to 10:30am </time>
+			<title>The Art of Brain</title>
+			<presenter> Some Guy D</presenter>
+			<location>ERLANG</location>
+		</session>
+		<session>
+			<id>6</id>
+			<time>9:30am to 10:30am </time>
+			<title>Javascript Patterns</title>
+			<presenter> Some Guy D</presenter>
+			<location>FORTRAN</location>
+		</session>
+	</slot>
+	<slot id="4" startTime="1030" endTime="1130" type="session" name="Slot 2">
+	<session>
+			<id>7</id>
+			<time>10:30am to 11:30am </time>
+			<title>Javascript is next big lang</title>
+			<presenter>some guy</presenter>
+			<location>ASSEMBLY</location>
+		</session>
+		<session>
+			<id>8</id>
+			<time>10:30am to 11:30am </time>
+			<title>Some Title A</title>
+			<presenter> Some Guy B</presenter>
+			<location>BASIC</location>
+		</session>
+		<session>
+			<id>9</id>
+			<time>10:30am to 11:30am </time>
+			<title>Windows Phone Building apps</title>
+			<presenter>UJJWAL</presenter>
+			<location>COBOL</location>
+		</session>
+		<session>
+			<id>10</id>
+			<time>10:30am to 11:30am </time>
+			<title>HACKER EXP on Running a Startup</title>
+			<presenter>Venkat</presenter>
+			<location>DELPHI</location>
+		</session>
+		<session>
+			<id>11</id>
+			<time>10:30am to 11:30am </time>
+			<title>3D store India</title>
+			<presenter>3D</presenter>
+			<location>ERLANG</location>
+		</session>
+		<session>
+			<id>12</id>
+			<time>10:30am to 11:30am </time>
+			<title>iphone Beginner ( C to obj C) </title>
+			<presenter> NAVJOT </presenter>
+			<location>FORTRAN</location>
+		</session>
+	</slot>
+	<slot id="5" startTime="1130" endTime="1230" type="session" name="Slot 3">
+		<session>
+			<id>13</id>
+			<time>11:30am to 12:30pm </time>
+			<title>Designing Apps for Windows</title>
+			<presenter>UJJWAL</presenter>
+			<location>ASSEMBLY</location>
+		</session>
+		<session>
+			<id>14</id>
+			<time>11:30am to 12:30pm </time>
+			<title>BACHELOR COOKING</title>
+			<presenter>VAISHNAVI</presenter>
+			<location>BASIC</location>
+		</session>
+		<session>
+			<id>15</id>
+			<time>11:30am to 12:30pm </time>
+			<title>CHROME Applications Dev</title>
+			<presenter>SOME GUY</presenter>
+			<location>COBOL</location>
+		</session>
+		<session>
+			<id>16</id>
+			<time>11:30am to 12:30pm </time>
+			<title>PYTHON + DJANGO</title>
+			<presenter>SARAN</presenter>
+			<location>DELPHI</location>
+		</session>
+		<session>
+			<id>17</id>
+			<time>11:30am to 12:30pm </time>
+			<title>ANDROID BASICS</title>
+			<presenter>SOME GUY</presenter>
+			<location>ERLANG</location>
+		</session>
+		<session>
+			<id>18</id>
+			<time>11:30am to 12:30pm </time>
+			<title>iphone Beginner ( C to obj C) </title>
+			<presenter> NAVJOT </presenter>
+			<location>FORTRAN</location>
+		</session>
+	</slot>
+	<slot id="6" startTime="1230" endTime="1400" type="fixed" name="Lunch Break"/>
+	<slot id="7" startTime="1400" endTime="1500" type="session" name="Slot 4">
+		<session>
+			<id>19</id>
+			<time>02:00pm to 03:00pm </time>
+			<title>Dont Present Enchant</title>
+			<presenter>Some Guy</presenter>
+			<location>ASSEMBLY</location>
+		</session>
+		<session>
+			<id>20</id>
+			<time>02:00pm to 03:00pm</time>
+			<title>GOD in Small Things</title>
+			<presenter>AMOGHA</presenter>
+			<location>BASIC</location>
+		</session>
+		<session>
+			<id>21</id>
+			<time>02:00pm to 03:00pm </time>
+			<title>How to teach Programming</title>
+			<presenter>Hemmanth</presenter>
+			<location>COBOL</location>
+		</session>
+		<session>
+			<id>22</id>
+			<time>02:00pm to 03:00pm </time>
+			<title>Observational Astronomy 101</title>
+			<presenter>Ninad</presenter>
+			<location>DELPHI</location>
+		</session>
+		<session>
+			<id>23</id>
+			<time>02:00pm to 03:00pm </time>
+			<title>ANDROID UI Design Patterns</title>
+			<presenter>SOME GUY</presenter>
+			<location>ERLANG</location>
+		</session>
+		<session>
+			<id>24</id>
+			<time>02:00pm to 03:00pm </time>
+			<title> BIT COIN ( Decentralized Internet Currency) </title>
+			<presenter> AKHIL </presenter>
+			<location>FORTRAN</location>
+		</session>
+	</slot>
+	<slot id="8" startTime="1500" endTime="1600" type="session" name="Slot 5">
+			<session>
+			<id>25</id>
+			<time>03:00pm to 04:00pm </time>
+			<title>Hands on Ruby on Rails</title>
+			<presenter>Prashanth</presenter>
+			<location>ASSEMBLY</location>
+		</session>
+		<session>
+			<id>26</id>
+			<time>03:00pm to 04:00pm </time>
+			<title>Oral Web</title>
+			<presenter>ALIPI</presenter>
+			<location>BASIC</location>
+		</session>
+		<session>
+			<id>27</id>
+			<time>03:00pm to 04:00pm </time>
+			<title>Creating Rajnikanth Powered Sites</title>
+			<presenter>Markandey</presenter>
+			<location>COBOL</location>
+		</session>
+		<session>
+			<id>28</id>
+			<time>03:00pm to 04:00pm </time>
+			<title>Open Data</title>
+			<presenter>Nisha</presenter>
+			<location>DELPHI</location>
+		</session>
+		<session>
+			<id>29</id>
+			<time>03:00pm to 04:00pm </time>
+			<title>Aliphi Architecture</title>
+			<presenter>ARVIND</presenter>
+			<location>ERLANG</location>
+		</session>
+		<session>
+			<id>30</id>
+			<time>03:00pm to 04:00pm </time>
+			<title>RWA Protocal </title>
+			<presenter> Sandeep </presenter>
+			<location>FORTRAN</location>
+		</session>
+	</slot>
+	<slot id="9" startTime="1600" endTime="1700" type="session" name="Slot 6">
+		<session>
+			<id>31</id>
+			<time>04:00pm to 05:00pm </time>
+			<title>Responsive Web Design</title>
+			<presenter>DKRIS</presenter>
+			<location>ASSEMBLY</location>
+		</session>
+		<session>
+			<id>32</id>
+			<time>04:00pm to 05:00pm </time>
+			<title>ANDROID APP</title>
+			<presenter>ALIPI</presenter>
+			<location>BASIC</location>
+		</session>
+	<session>
+			<id>33</id>
+			<time>03:00pm to 04:00pm </time>
+			<title>Consumer Electronics Prod Design</title>
+			<presenter>Viral</presenter>
+			<location>COBOL</location>
+		</session>
+		<session>
+			<id>34</id>
+			<time>03:00pm to 04:00pm </time>
+			<title>How to Build Good Android UI</title>
+			<presenter>100rabh</presenter>
+			<location>DELPHI</location>
+		</session>
+		<session>
+			<id>35</id>
+			<time>04:00pm to 05:00pm </time>
+			<title>Next Step Service Design</title>
+			<presenter>Harikrishnan</presenter>
+			<location>ERLANG</location>
+		</session>
+		<session>
+			<id>36</id>
+			<time>04:00pm to 05:00pm </time>
+			<title>Decentralized Internet aka Darknet </title>
+			<presenter> Thej </presenter>
+			<location>FORTRAN</location>
+		</session>
+	</slot>
+	<slot id="10" startTime="1700" endTime="1730" type="fixed" name="Feedback and Closing">
+	</slot>
+</barcamp-data>

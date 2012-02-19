@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="scheduleTextColor">#f00</color>
+    <color name="actionbar_separator">#000</color>
+    <color name="actionbar_title">#000</color>
+    <color name="actionbar_background_start">#588699</color>
+    <color name="actionbar_background_end">#588699</color>
+    <color name="actionbar_background_item_pressed_start">#4C7384</color>
+    <color name="actionbar_background_item_pressed_end">#4C7384</color>
+    <color name="session_text_color">#83A23A</color>
+</resources>

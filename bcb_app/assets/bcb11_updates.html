@@ -1,0 +1,34 @@
+<html><head></head><body>
+
+<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+<script>
+new TWTR.Widget({
+  version: 2,
+  type: 'search',
+  search: 'barcampbng OR bcb11 OR "barcamp bangalore"',
+  interval: 30000,
+  title: 'Barcamp Bangalore',
+  subject: 'Tweets about BCB11',
+  width: 'auto',
+  height: 5000,
+  theme: {
+    shell: {
+      background: '#ffffff',
+      color: '#000000'
+    },
+    tweets: {
+      background: '#ffffff',
+      color: '#444444',
+      links: '#1985b5'
+    }
+  },
+  features: {
+    scrollbar: true,
+    loop: false,
+    live: true,
+    behavior: 'all'
+  }
+}).render().start();
+</script>
+
+</body></html>

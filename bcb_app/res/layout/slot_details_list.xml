@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000"
+    android:orientation="vertical" >
+
+    <com.markupartist.android.widget.ActionBar
+        android:id="@+id/actionBar1"
+        style="@style/ActionBar" >
+    </com.markupartist.android.widget.ActionBar>
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="@drawable/listview_seperator2"
+        android:dividerHeight="2dp" >
+    </ListView>
+
+    <TextView
+        android:id="@+id/no_slot_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="10dp"
+        android:paddingTop="15dp"
+        android:text="@string/no_session"
+        android:textColor="#85A236"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="sans"
+        android:visibility="gone" />
+
+</LinearLayout>
