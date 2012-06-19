@@ -17,7 +17,6 @@ package com.bangalore.barcamp.activity;
 
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -34,7 +33,7 @@ import android.widget.LinearLayout;
 import com.bangalore.barcamp.BCBUtils;
 import com.bangalore.barcamp.R;
 
-public class HomeActivity extends Activity {
+public class HomeActivity extends BCBActivityBaseClass {
 
 	protected static final int START_SCHEDULE = 100;
 	protected static final int ABOUT_ACTIVITY_REQUEST = 101;
@@ -48,9 +47,11 @@ public class HomeActivity extends Activity {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home_screen);
+
+		BCBUtils.addNavigationActions(this);
 
 		BCBUtils.createActionBarOnActivity(this, true);
 

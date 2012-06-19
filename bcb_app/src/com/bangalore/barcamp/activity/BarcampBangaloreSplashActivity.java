@@ -30,7 +30,7 @@ public class BarcampBangaloreSplashActivity extends Activity {
 	public Handler generalHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			Intent intent = new Intent(BarcampBangaloreSplashActivity.this,
-					HomeActivity.class);
+					ScheduleActivity.class);
 			startActivity(intent);
 			finish();
 		}

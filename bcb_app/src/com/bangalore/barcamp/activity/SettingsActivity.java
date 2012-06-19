@@ -15,32 +15,29 @@
  */
 package com.bangalore.barcamp.activity;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
-import com.bangalore.barcamp.BCBConsts;
 import com.bangalore.barcamp.BCBSharedPrefUtils;
 import com.bangalore.barcamp.BCBUtils;
 import com.bangalore.barcamp.R;
 import com.bangalore.barcamp.service.UpdatesIntentService;
 
-public class SettingsActivity extends Activity {
+public class SettingsActivity extends BCBActivityBaseClass {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.settings_screen);
 
 		BCBUtils.createActionBarOnActivity(this);
+		BCBUtils.addNavigationActions(this);
 		((CheckBox) findViewById(R.id.notificationSettingsCheckBox))
 				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -65,6 +62,5 @@ public class SettingsActivity extends Activity {
 						}
 					}
 				});
-
 	}
 }

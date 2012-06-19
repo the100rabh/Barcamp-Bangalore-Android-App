@@ -18,7 +18,6 @@ package com.bangalore.barcamp.activity;
 
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -27,28 +26,26 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.bangalore.barcamp.BCBConsts;
 import com.bangalore.barcamp.BCBSharedPrefUtils;
 import com.bangalore.barcamp.BCBUtils;
 import com.bangalore.barcamp.R;
 import com.markupartist.android.widget.ActionBar;
 
-public class ShareActivity extends Activity {
+public class ShareActivity extends BCBActivityBaseClass {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.share_screen);
 		BCBUtils.createActionBarOnActivity(this);
+		BCBUtils.addNavigationActions(this);
 		ActionBar actionbar = (ActionBar) findViewById(R.id.actionBar1);
-		actionbar.removeActionAt(0);
+		// actionbar.removeActionAt(0);
 		((EditText) findViewById(R.id.editText1))
 				.addTextChangedListener(new TextWatcher() {
 
@@ -117,7 +114,7 @@ public class ShareActivity extends Activity {
 								((EditText) findViewById(R.id.editText1))
 										.getText().toString() + " #bcb11");
 						intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					
+
 						startActivity(intent);
 						finish();
 					}

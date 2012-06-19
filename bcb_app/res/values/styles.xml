@@ -37,7 +37,14 @@
         <item name="android:layout_marginRight">1px</item>
         <item name="android:layout_marginLeft">0px</item>
     </style>
-    <style name="ActionBarProgressBar" parent="@android:style/Widget.ProgressBar.Small">
+    <style name="ActionBarProgressBar" parent="@android:style/Widget.ProgressBar.Small"></style>
+
+    <style name="NavigationTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#ddd</item>        
     </style>
     
 </resources>

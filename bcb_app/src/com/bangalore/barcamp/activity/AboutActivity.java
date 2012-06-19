@@ -15,7 +15,6 @@
  */
 package com.bangalore.barcamp.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,19 +23,20 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageView;
 
-import com.bangalore.barcamp.BCBConsts;
 import com.bangalore.barcamp.BCBUtils;
 import com.bangalore.barcamp.R;
 
-public class AboutActivity extends Activity {
+public class AboutActivity extends BCBActivityBaseClass {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.about_screen);
 
+		BCBUtils.addNavigationActions(this);
 		BCBUtils.createActionBarOnActivity(this);
+
 		((ImageView) findViewById(R.id.imageView1))
 				.setOnClickListener(new OnClickListener() {
 
@@ -51,6 +51,5 @@ public class AboutActivity extends Activity {
 				});
 
 	}
-
 
 }

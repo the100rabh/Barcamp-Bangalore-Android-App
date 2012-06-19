@@ -19,7 +19,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -29,13 +28,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
-import com.bangalore.barcamp.BCBConsts;
 import com.bangalore.barcamp.BCBSharedPrefUtils;
 import com.bangalore.barcamp.BCBUtils;
 import com.bangalore.barcamp.R;
@@ -44,7 +41,7 @@ import com.bangalore.barcamp.data.BarcampData;
 import com.bangalore.barcamp.data.Session;
 import com.bangalore.barcamp.data.Slot;
 
-public class SessionDetailsActivity extends Activity {
+public class SessionDetailsActivity extends BCBActivityBaseClass {
 	public final static String EXTRA_SESSION_POSITION = "session_position";
 	public final static String EXTRA_SLOT_POS = "slotPosition";
 	public static final String EXTRA_SESSION_ID = "sessionID";
@@ -53,10 +50,10 @@ public class SessionDetailsActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.session_details);
 
 		BCBUtils.createActionBarOnActivity(this);
+		BCBUtils.addNavigationActions(this);
 		BarcampData data = ((BarcampBangalore) getApplicationContext())
 				.getBarcampData();
 		if (data == null) {

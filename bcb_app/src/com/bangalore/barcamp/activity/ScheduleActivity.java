@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -36,14 +37,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bangalore.barcamp.BCBUtils;
+import com.bangalore.barcamp.R;
 import com.bangalore.barcamp.data.BarcampBangalore;
 import com.bangalore.barcamp.data.BarcampData;
 import com.bangalore.barcamp.data.Slot;
-import com.bangalore.barcamp.R;
 import com.markupartist.android.widget.ActionBar;
 import com.markupartist.android.widget.ActionBar.Action;
 
-public class ScheduleActivity extends Activity {
+public class ScheduleActivity extends BCBActivityBaseClass {
 
 	private List<Button> buttons = new ArrayList<Button>();
 	private FetchScheduleAsyncTask task = null;
@@ -51,12 +52,15 @@ public class ScheduleActivity extends Activity {
 	private static final int HOUR_DISTANCE = 124;
 	private static final String BCB_DATA = "BCBData";
 
+	private static float screenAdjustment = 1.0f;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.schedule);
 		BCBUtils.createActionBarOnActivity(this);
+		BCBUtils.addNavigationActions(this);
 
 		BarcampData data = ((BarcampBangalore) getApplicationContext())
 				.getBarcampData();
@@ -89,6 +93,13 @@ public class ScheduleActivity extends Activity {
 			}
 		}, 0);
 
+		DisplayMetrics metrics = new DisplayMetrics();
+		this.getWindow().getWindowManager().getDefaultDisplay()
+				.getMetrics(metrics);
+		if (metrics.densityDpi == DisplayMetrics.DENSITY_HIGH) {
+			screenAdjustment = 1.5f;
+		}
+
 	}
 
 	protected void clearExisitingLayout() {
@@ -116,9 +127,12 @@ public class ScheduleActivity extends Activity {
 						topPadding += ((((slot.startTime % 100) * 100) / 60) * HOUR_DISTANCE) / 100 + 1;
 					}
 
-					params.setMargins(60, topPadding, 30, 0);
+					params.setMargins((int) (60 * screenAdjustment),
+							(int) (topPadding * screenAdjustment),
+							(int) (30 * screenAdjustment), 0);
 				} else {
-					params.setMargins(60, 0, 30, 0);
+					params.setMargins((int) (60 * screenAdjustment), 0,
+							(int) (30 * screenAdjustment), 0);
 				}
 
 				button.setTextColor(Color.WHITE);
@@ -154,7 +168,7 @@ public class ScheduleActivity extends Activity {
 		} else {
 			height = ((end - start) * (HOUR_DISTANCE - 1)) / 100;
 		}
-		return height;
+		return (int) (height * screenAdjustment);
 	}
 
 	private void addScheduleLayouts(int startHours, int endHours) {
@@ -163,8 +177,8 @@ public class ScheduleActivity extends Activity {
 		for (int count = startHours; count <= endHours; count++) {
 			ImageView image = new ImageView(this);
 			image.setImageResource(R.drawable.time_line);
-			image.setMinimumHeight(10);
-			image.setPadding(0, 8, 0, 0);
+			image.setMinimumHeight((int) (10 * screenAdjustment));
+			image.setPadding(0, (int) (8 * screenAdjustment), 0, 0);
 			LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(
 					LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 			image.setBackgroundColor(android.R.color.transparent);
@@ -174,16 +188,16 @@ public class ScheduleActivity extends Activity {
 
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
 					LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-			params.setMargins(5, 0, 0, 0);
+			params.setMargins((int) (5 * screenAdjustment), 0, 0, 0);
 			String timeString = String.valueOf(count);
 			timeString += " hrs";
 			textView.setTextColor(Color.WHITE);
 			if (factor == 1.0) {
-				textView.setTextSize(12);
-				textView.setPadding(0, 0, 0, 94);
+				textView.setTextSize(12 * screenAdjustment);
+				textView.setPadding(0, 0, 0, (int) (94 * screenAdjustment));
 			} else {
 				textView.setTextSize(10);
-				textView.setPadding(0, 0, 0, 86);
+				textView.setPadding(0, 0, 0, (int) (86 * screenAdjustment));
 			}
 			textView.setText(timeString);
 			layout.addView(textView, params);
