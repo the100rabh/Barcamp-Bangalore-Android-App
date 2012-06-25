@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+<LinearLayout android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <com.markupartist.android.widget.ActionBar
         android:id="@+id/actionBar1"
@@ -15,8 +14,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="#555"
-        android:gravity="center" 
-        >
+        android:gravity="center" >
 
         <ProgressBar
             android:id="@+id/progressBar1"
@@ -93,7 +91,7 @@
                     android:paddingBottom="42dp"
                     android:text="TextView"
                     android:textColor="#000"
-                    android:textSize="10dp" />
+                    android:textSize="10dp" />
                 -->
             </LinearLayout>
 
@@ -183,10 +181,17 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:text="Button" >
-                </Button>
+                </Button>
                 -->
             </LinearLayout>
         </FrameLayout>
     </ScrollView>
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" android:background="#000">
+    </ListView>
 
 </LinearLayout>

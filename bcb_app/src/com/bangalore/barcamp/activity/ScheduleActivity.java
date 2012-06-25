@@ -23,21 +23,21 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ListView;
 
 import com.bangalore.barcamp.BCBUtils;
 import com.bangalore.barcamp.R;
+import com.bangalore.barcamp.SlotsListAdapter;
 import com.bangalore.barcamp.data.BarcampBangalore;
 import com.bangalore.barcamp.data.BarcampData;
 import com.bangalore.barcamp.data.Slot;
@@ -48,6 +48,7 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 
 	private List<Button> buttons = new ArrayList<Button>();
 	private FetchScheduleAsyncTask task = null;
+	private List<Slot> slotsArray;
 	private static final int SHOW_ERROR_DIALOG = 100;
 	private static final int HOUR_DISTANCE = 124;
 	private static final String BCB_DATA = "BCBData";
@@ -80,7 +81,8 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 				if (task == null) {
 					findViewById(R.id.spinnerLayout)
 							.setVisibility(View.VISIBLE);
-					findViewById(R.id.scrollView1).setVisibility(View.GONE);
+					// findViewById(R.id.scrollView1).setVisibility(View.GONE);
+					findViewById(R.id.listView1).setVisibility(View.GONE);
 					task = new FetchScheduleAsyncTask();
 					task.execute();
 					clearExisitingLayout();
@@ -109,47 +111,69 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 	}
 
 	private void addScheduleItems(List<Slot> slotsArray) {
-		boolean isFirst = true;
-		if (slotsArray != null && slotsArray.size() > 0) {
-			LinearLayout layout = (LinearLayout) findViewById(R.id.scheduleItemsLayout);
-			for (Slot slot : slotsArray) {
-				Button button = new Button(this);
-				button.setText(slot.name);
-				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-						LayoutParams.FILL_PARENT, getButtonHeight(slot));
-				if (isFirst) {
-					isFirst = false;
-					int topPadding = 10;
-					final float factor = getResources().getDisplayMetrics().density;
-					if (factor == 1.0) {
-						topPadding += ((((slot.startTime % 100) * 100) / 60) * HOUR_DISTANCE) / 100;
-					} else {
-						topPadding += ((((slot.startTime % 100) * 100) / 60) * HOUR_DISTANCE) / 100 + 1;
-					}
+		ListView listView = (ListView) findViewById(R.id.listView1);
+		SlotsListAdapter adapter = new SlotsListAdapter(this, slotsArray);
+		this.slotsArray = slotsArray;
+		listView.setAdapter(adapter);
+		listView.setOnItemClickListener(new OnItemClickListener() {
 
-					params.setMargins((int) (60 * screenAdjustment),
-							(int) (topPadding * screenAdjustment),
-							(int) (30 * screenAdjustment), 0);
-				} else {
-					params.setMargins((int) (60 * screenAdjustment), 0,
-							(int) (30 * screenAdjustment), 0);
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int pos,
+					long id) {
+				if (ScheduleActivity.this.slotsArray.get(pos).type
+						.equals(Slot.SESSION)) {
+					Intent intent = new Intent(ScheduleActivity.this,
+							SlotDetailsActivity.class);
+					intent.putExtra(SlotDetailsActivity.EXTRA_POS, pos);
+					startActivity(intent);
 				}
-
-				button.setTextColor(Color.WHITE);
-				if (slot.type.compareToIgnoreCase(Slot.SESSION) == 0) {
-					button.setBackgroundResource(R.drawable.schedule_item_session_button);
-					button.setOnClickListener(new SlotItemClickListener(this,
-							slot));
-				} else if (slot.type.compareToIgnoreCase(Slot.FIXED) == 0) {
-					button.setBackgroundResource(R.drawable.schedule_item_fixed_button);
-					button.setClickable(false);
-				} else {
-					continue;
-				}
-				layout.addView(button, params);
-				buttons.add(button);
 			}
-		}
+		});
+
+		// boolean isFirst = true;
+		// if (slotsArray != null && slotsArray.size() > 0) {
+		// LinearLayout layout = (LinearLayout)
+		// findViewById(R.id.scheduleItemsLayout);
+		// for (Slot slot : slotsArray) {
+		// Button button = new Button(this);
+		// button.setText(slot.name);
+		// LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+		// LayoutParams.FILL_PARENT, getButtonHeight(slot));
+		// if (isFirst) {
+		// isFirst = false;
+		// int topPadding = 10;
+		// final float factor = getResources().getDisplayMetrics().density;
+		// if (factor == 1.0) {
+		// topPadding += ((((slot.startTime % 100) * 100) / 60) * HOUR_DISTANCE)
+		// / 100;
+		// } else {
+		// topPadding += ((((slot.startTime % 100) * 100) / 60) * HOUR_DISTANCE)
+		// / 100 + 1;
+		// }
+		//
+		// params.setMargins((int) (60 * screenAdjustment),
+		// (int) (topPadding * screenAdjustment),
+		// (int) (30 * screenAdjustment), 0);
+		// } else {
+		// params.setMargins((int) (60 * screenAdjustment), 0,
+		// (int) (30 * screenAdjustment), 0);
+		// }
+		//
+		// button.setTextColor(Color.WHITE);
+		// if (slot.type.compareToIgnoreCase(Slot.SESSION) == 0) {
+		// button.setBackgroundResource(R.drawable.schedule_item_session_button);
+		// button.setOnClickListener(new SlotItemClickListener(this,
+		// slot));
+		// } else if (slot.type.compareToIgnoreCase(Slot.FIXED) == 0) {
+		// button.setBackgroundResource(R.drawable.schedule_item_fixed_button);
+		// button.setClickable(false);
+		// } else {
+		// continue;
+		// }
+		// layout.addView(button, params);
+		// buttons.add(button);
+		// }
+		// }
 	}
 
 	private int getButtonHeight(Slot slot) {
@@ -172,36 +196,38 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 	}
 
 	private void addScheduleLayouts(int startHours, int endHours) {
-		LinearLayout layout = (LinearLayout) findViewById(R.id.timeScheduleLayout);
-		final float factor = getResources().getDisplayMetrics().density;
-		for (int count = startHours; count <= endHours; count++) {
-			ImageView image = new ImageView(this);
-			image.setImageResource(R.drawable.time_line);
-			image.setMinimumHeight((int) (10 * screenAdjustment));
-			image.setPadding(0, (int) (8 * screenAdjustment), 0, 0);
-			LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(
-					LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-			image.setBackgroundColor(android.R.color.transparent);
-			image.setLayoutParams(imageParams);
-			layout.addView(image);
-			TextView textView = new TextView(this);
-
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-					LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-			params.setMargins((int) (5 * screenAdjustment), 0, 0, 0);
-			String timeString = String.valueOf(count);
-			timeString += " hrs";
-			textView.setTextColor(Color.WHITE);
-			if (factor == 1.0) {
-				textView.setTextSize(12 * screenAdjustment);
-				textView.setPadding(0, 0, 0, (int) (94 * screenAdjustment));
-			} else {
-				textView.setTextSize(10);
-				textView.setPadding(0, 0, 0, (int) (86 * screenAdjustment));
-			}
-			textView.setText(timeString);
-			layout.addView(textView, params);
-		}
+		// LinearLayout layout = (LinearLayout)
+		// findViewById(R.id.timeScheduleLayout);
+		// final float factor = getResources().getDisplayMetrics().density;
+		// for (int count = startHours; count <= endHours; count++) {
+		// ImageView image = new ImageView(this);
+		// image.setImageResource(R.drawable.time_line);
+		// image.setMinimumHeight((int) (10 * screenAdjustment));
+		// image.setPadding(0, (int) (8 * screenAdjustment), 0, 0);
+		// LinearLayout.LayoutParams imageParams = new
+		// LinearLayout.LayoutParams(
+		// LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+		// image.setBackgroundColor(android.R.color.transparent);
+		// image.setLayoutParams(imageParams);
+		// layout.addView(image);
+		// TextView textView = new TextView(this);
+		//
+		// LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+		// LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+		// params.setMargins((int) (5 * screenAdjustment), 0, 0, 0);
+		// String timeString = String.valueOf(count);
+		// timeString += " hrs";
+		// textView.setTextColor(Color.WHITE);
+		// if (factor == 1.0) {
+		// textView.setTextSize(12 * screenAdjustment);
+		// textView.setPadding(0, 0, 0, (int) (94 * screenAdjustment));
+		// } else {
+		// textView.setTextSize(10);
+		// textView.setPadding(0, 0, 0, (int) (86 * screenAdjustment));
+		// }
+		// textView.setText(timeString);
+		// layout.addView(textView, params);
+		// }
 	}
 
 	protected Dialog onCreateDialog(int id) {
@@ -259,7 +285,8 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 						.getBarcampData();
 				if (data != null) {
 					findViewById(R.id.spinnerLayout).setVisibility(View.GONE);
-					findViewById(R.id.scrollView1).setVisibility(View.VISIBLE);
+					// findViewById(R.id.scrollView1).setVisibility(View.VISIBLE);
+					findViewById(R.id.listView1).setVisibility(View.VISIBLE);
 					int startTime = data.slotsArray.get(0).startTime;
 					int endTime = data.slotsArray
 							.get(data.slotsArray.size() - 1).endTime;
@@ -304,14 +331,16 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 				.getBarcampData();
 		if (data == null) {
 			findViewById(R.id.spinnerLayout).setVisibility(View.VISIBLE);
-			findViewById(R.id.scrollView1).setVisibility(View.GONE);
+			// findViewById(R.id.scrollView1).setVisibility(View.GONE);
+			findViewById(R.id.listView1).setVisibility(View.GONE);
 			task = new FetchScheduleAsyncTask();
 			task.execute();
 		} else if (((LinearLayout) findViewById(R.id.timeScheduleLayout))
 				.getChildCount() == 0) {
 			clearExisitingLayout();
 			findViewById(R.id.spinnerLayout).setVisibility(View.GONE);
-			findViewById(R.id.scrollView1).setVisibility(View.VISIBLE);
+			// findViewById(R.id.scrollView1).setVisibility(View.VISIBLE);
+			findViewById(R.id.listView1).setVisibility(View.VISIBLE);
 			int startTime = data.slotsArray.get(0).startTime;
 			int endTime = data.slotsArray.get(data.slotsArray.size() - 1).endTime;
 			addScheduleLayouts(startTime / 100, endTime / 100);
