@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#000"
+    android:background="@color/session_background"
     android:orientation="vertical" >
 
     <com.markupartist.android.widget.ActionBar
@@ -27,9 +27,9 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
+                android:text="@string/session_title"
                 android:textColor="@color/session_text_color"
-                android:textSize="16sp"
-                android:text="@string/session_title" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/title"
@@ -48,8 +48,8 @@
                 android:layout_marginTop="5dp"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
+                android:text="@string/presented_by"
                 android:textColor="@color/session_text_color"
-                android:text="@string/presented_by" 
                 android:textSize="16sp" />
 
             <TextView
@@ -68,8 +68,8 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
-                android:textColor="@color/session_text_color"
                 android:text="@string/when"
+                android:textColor="@color/session_text_color"
                 android:textSize="16sp" />
 
             <TextView

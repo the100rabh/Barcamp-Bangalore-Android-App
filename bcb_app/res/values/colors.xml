@@ -4,10 +4,22 @@
     <color name="scheduleTextColor">#f00</color>
     <color name="actionbar_separator">#000</color>
     <color name="actionbar_title">#000</color>
-    <color name="actionbar_background_start">#588699</color>
-    <color name="actionbar_background_end">#588699</color>
-    <color name="actionbar_background_item_pressed_start">#4C7384</color>
-    <color name="actionbar_background_item_pressed_end">#4C7384</color>
-    <color name="session_text_color">#83A23A</color>
-    <color name="navigation_background">#505050</color>
+    <color name="actionbar_background_start">#cbe86b</color>
+    <color name="actionbar_background_end">#cbe86b</color>
+    <color name="actionbar_background_item_pressed_start">#B5DE2E</color>
+    <color name="actionbar_background_item_pressed_end">#B5DE2E</color>
+    <color name="session_text_color">#1c140d</color>
+    <color name="navigation_background">#E6D4C4</color>
+    <color name="list_background">#1C140D</color>
+    <color name="slot_left_pane">#F2E9E1</color>
+    <color name="slot_left_pane_pressed">#E6D4C4</color>
+    <color name="slot_right_pane_pressed">#F2E9E1</color>
+    <color name="slot_right_pane">#fff</color>
+    <color name="slot_right_pane_text_color">#1c140d</color>
+    <color name="navigation_item_color">#cbe86b</color>
+    <color name="navigation_item_pressed_color">#B5DE2E</color>
+    <color name="navigation_item_text_color">#1c140d</color>
+    <color name="navigation_item_seperator">#1c140d</color>
+    <color name="session_background">#fff</color>
+    
 </resources>

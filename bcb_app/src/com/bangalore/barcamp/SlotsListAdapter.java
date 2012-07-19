@@ -6,39 +6,25 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bangalore.barcamp.data.Session;
 import com.bangalore.barcamp.data.Slot;
 
-public class SlotsListAdapter extends BaseAdapter {
+public class SlotsListAdapter extends ArrayAdapter<Slot> {
 
 	private LayoutInflater layoutInflaterService;
 	private Context context;
 	private List<Slot> slotsArray;
 
 	public SlotsListAdapter(Context context, List<Slot> slotsArray) {
-		super();
+		super(context, R.layout.slots_list_item, slotsArray);
 		this.layoutInflaterService = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		this.context = context;
 		this.slotsArray = slotsArray;
-	}
-
-	@Override
-	public int getCount() {
-		return slotsArray.size();
-	}
-
-	@Override
-	public Object getItem(int pos) {
-		return slotsArray.get(pos);
-	}
-
-	@Override
-	public long getItemId(int id) {
-		return id;
 	}
 
 	@Override
@@ -54,6 +40,8 @@ public class SlotsListAdapter extends BaseAdapter {
 			holder.time = (TextView) convertView.findViewById(R.id.slot_time);
 			holder.title = (TextView) convertView.findViewById(R.id.slot_title);
 			holder.desc = (TextView) convertView.findViewById(R.id.slot_desc);
+			holder.arrow = (ImageView) convertView
+					.findViewById(R.id.imageView1);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
@@ -63,6 +51,10 @@ public class SlotsListAdapter extends BaseAdapter {
 		}
 		if (holder.title != null) {
 			holder.title.setText(viewObject.name);
+		}
+		holder.arrow.setVisibility(View.GONE);
+		if (viewObject.type.equals(Slot.SESSION)) {
+			holder.arrow.setVisibility(View.VISIBLE);
 		}
 		if (holder.desc != null) {
 			holder.desc.setVisibility(View.GONE);
@@ -76,15 +68,30 @@ public class SlotsListAdapter extends BaseAdapter {
 				}
 			}
 		}
-
+		convertView.forceLayout();
 		convertView.setTag(holder);
 
 		return convertView;
+	}
+
+	@Override
+	public boolean areAllItemsEnabled() {
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled(int position) {
+		Slot slot = (Slot) getItem(position);
+		if ((slot != null) && slot.type.equals(Slot.FIXED)) {
+			return false;
+		}
+		return true;
 	}
 
 	private static class ViewHolder {
 		TextView time;
 		TextView title;
 		TextView desc;
+		ImageView arrow;
 	}
 }

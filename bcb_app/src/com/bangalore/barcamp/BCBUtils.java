@@ -34,6 +34,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -209,7 +210,13 @@ public class BCBUtils {
 	public static void addNavigationActions(
 			final BCBActivityBaseClass homeActivity) {
 		homeActivity.setBehindContentView(R.layout.navigation_menu);
-		homeActivity.setBehindOffset(100);
+		int offset = 100;
+		DisplayMetrics metrics = new DisplayMetrics();
+		homeActivity.getWindow().getWindowManager().getDefaultDisplay()
+				.getMetrics(metrics);
+		offset = ((metrics.widthPixels * 130)) / 480;
+
+		homeActivity.setBehindOffset(offset);
 		homeActivity.setBehindScrollScale(0.5f);
 
 		View view = homeActivity.findViewById(R.id.nav_agenda);
