@@ -28,6 +28,8 @@ import android.util.Log;
 
 import com.bangalore.barcamp.activity.SessionDetailsActivity;
 import com.bangalore.barcamp.data.BarcampBangalore;
+import com.bangalore.barcamp.data.BarcampData;
+import com.bangalore.barcamp.data.Session;
 
 public class SessionAlarmIntentService extends IntentService {
 
@@ -53,7 +55,7 @@ public class SessionAlarmIntentService extends IntentService {
 		}
 		if (retVal) {
 			int icon = R.drawable.app_logo; // icon from resources
-			CharSequence tickerText = "Hello"; // ticker-text
+			CharSequence tickerText = "Session Alert"; // ticker-text
 			long when = System.currentTimeMillis(); // notification time
 			CharSequence contentTitle = "My notification"; // message title
 			CharSequence contentText = "Hello World!"; // message text
@@ -68,6 +70,26 @@ public class SessionAlarmIntentService extends IntentService {
 			notificationIntent.putExtra(
 					SessionDetailsActivity.EXTRA_SESSION_ID,
 					intent.getStringExtra(SESSION_ID));
+
+			String sessionID = null;
+			BarcampData data = ((BarcampBangalore) context).getBarcampData();
+			if (data != null) {
+				int slotIndex = intent.getIntExtra(EXTRA_SLOT_POS, -1);
+				int sessionPos = intent.getIntExtra(EXTRA_SESSION_POSITION, -1);
+				sessionID = intent.getStringExtra(SESSION_ID);
+				if (slotIndex == -1 || sessionPos == -1 || sessionID == null) {
+					return;
+				}
+				Session session = data.slotsArray.get(slotIndex).sessionsArray
+						.get(sessionPos);
+				if (!session.id.equals(sessionID)) {
+					// search session ID here
+				}
+				contentTitle = session.title;
+				contentText = "By " + session.presenter + " @"
+						+ session.location;
+			}
+
 			PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
 					notificationIntent, 0);
 
@@ -82,7 +104,8 @@ public class SessionAlarmIntentService extends IntentService {
 
 			String ns = Context.NOTIFICATION_SERVICE;
 			NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);
-			mNotificationManager.notify(100, notification);
+			mNotificationManager.notify(Integer.parseInt(sessionID),
+					notification);
 		}
 	}
 }

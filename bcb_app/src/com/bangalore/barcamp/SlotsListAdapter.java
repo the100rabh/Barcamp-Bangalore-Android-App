@@ -3,6 +3,7 @@ package com.bangalore.barcamp;
 import java.util.List;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,14 +59,21 @@ public class SlotsListAdapter extends ArrayAdapter<Slot> {
 		}
 		if (holder.desc != null) {
 			holder.desc.setVisibility(View.GONE);
+			String descText = "";
+			String seperatorText = "";
+			int count = 1;
 			for (Session session : viewObject.sessionsArray) {
 				if (BCBSharedPrefUtils.getAlarmSettingsForID(context,
 						session.id) == BCBSharedPrefUtils.ALARM_SET) {
-					holder.desc.setText(session.title + " By "
-							+ session.presenter + " at " + session.location);
-					holder.desc.setVisibility(View.VISIBLE);
-					break;
+					descText += seperatorText + count++ + ") \""
+							+ session.title + "\" By " + session.presenter
+							+ " @" + session.location;
+					seperatorText = "\n";
 				}
+			}
+			if (!TextUtils.isEmpty(descText)) {
+				holder.desc.setText(descText);
+				holder.desc.setVisibility(View.VISIBLE);
 			}
 		}
 		convertView.forceLayout();
