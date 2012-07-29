@@ -73,7 +73,8 @@ public class SessionDetailsActivity extends BCBActivityBaseClass {
 		((TextView) findViewById(R.id.title)).setText(session.title);
 		((TextView) findViewById(R.id.time)).setText(session.time);
 		((TextView) findViewById(R.id.location)).setText(session.location);
-		((TextView) findViewById(R.id.presenter)).setText(session.presenter);
+		((TextView) findViewById(R.id.presenter)).setText("By "
+				+ session.presenter);
 
 		CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox1);
 		checkBox.setChecked(BCBSharedPrefUtils.getAlarmSettingsForID(this,

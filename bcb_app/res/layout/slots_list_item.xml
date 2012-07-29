@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/list_background_drawable"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:background="#0000"    
     android:orientation="horizontal" >
 
     <TextView
@@ -14,44 +16,53 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:text="8:00 am"
-        android:textColor="#000" />
+        android:textColor="#fff" />
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_weight="1"
-        android:background="@drawable/list_background_drawable"
-        android:orientation="vertical"
+        android:background="@drawable/slot_desc_background_drawable"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="-10dp"
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="5dp"
         android:paddingTop="5dp" >
 
-        <TextView
-            android:id="@+id/slot_title"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Slot Title"
-            android:textColor="@color/slot_right_pane_text_color"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:layout_weight="1"            
+            android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/slot_desc"
+            <TextView
+                android:id="@+id/slot_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Slot Title"
+                android:textColor="@color/slot_right_pane_text_color"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/slot_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Slot Desc"
+                android:textColor="@color/slot_right_pane_secondary_text_color" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Slot Desc"
-            android:textColor="@color/slot_right_pane_text_color" />
+            android:layout_gravity="right|center_vertical"
+            android:contentDescription="Session"
+            android:src="@drawable/ic_action_right_arrow" />
+
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|center_vertical"
-        android:background="@drawable/list_background_drawable"
-        android:contentDescription="Session"
-        android:src="@drawable/ic_action_right_arrow" />
 
 </LinearLayout>

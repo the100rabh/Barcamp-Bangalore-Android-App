@@ -33,11 +33,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
+import android.graphics.Shader.TileMode;
 import android.net.Uri;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 import com.bangalore.barcamp.activity.AboutActivity;
 import com.bangalore.barcamp.activity.BCBActivityBaseClass;
@@ -70,23 +75,7 @@ public class BCBUtils {
 		// ******** Start of Action Bar configuration
 		ActionBar actionbar = (ActionBar) activity
 				.findViewById(R.id.actionBar1);
-		// if (!isHome) {
-		// actionbar.setHomeLogo(R.drawable.home_icon);
-		// actionbar.setHomeAction(new Action() {
-		// @Override
-		// public void performAction(View view) {
-		// Intent intent = new Intent(activity, HomeActivity.class);
-		// intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		// activity.startActivity(intent);
-		// }
-		//
-		// @Override
-		// public int getDrawable() {
-		// return R.drawable.home_icon;
-		// }
-		// });
-		// } else {
-		actionbar.setHomeLogo(R.drawable.home_icon);
+		actionbar.setHomeLogo(R.drawable.home);
 		actionbar.setHomeAction(new Action() {
 			@Override
 			public void performAction(View view) {
@@ -95,31 +84,16 @@ public class BCBUtils {
 
 			@Override
 			public int getDrawable() {
-				return R.drawable.home_icon;
+				return R.drawable.home;
 			}
 		});
 
-		// }
 		actionbar.setTitle(R.string.app_title_text);
-		// actionbar.addAction(createShareAction(activity));
-		// ((TextView) (activity
-		// .findViewById(com.markupartist.android.widget.actionbar.R.id.actionbar_title)))
-		// .setTypeface(Typeface.create("sans", 0));
-		//
-		// actionbar.addAction(new Action() {
-		//
-		// @Override
-		// public void performAction(View view) {
-		// Intent newIntent = new Intent(activity, SettingsActivity.class);
-		// activity.startActivity(newIntent);
-		// }
-		//
-		// @Override
-		// public int getDrawable() {
-		// return R.drawable.settings_icon;
-		//
-		// }
-		// });
+		TextView logo = (TextView) activity.findViewById(R.id.actionbar_title);
+		Shader textShader = new LinearGradient(0, 0, 0, 20, new int[] {
+				Color.WHITE, Color.GRAY }, new float[] { 0, 1 }, TileMode.CLAMP);
+		logo.getPaint().setShader(textShader);
+		logo.getPaint().setShadowLayer(1, 2, 2, Color.BLACK);
 
 		// ******** End of Action Bar configuration
 

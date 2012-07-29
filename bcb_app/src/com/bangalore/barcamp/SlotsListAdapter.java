@@ -65,9 +65,9 @@ public class SlotsListAdapter extends ArrayAdapter<Slot> {
 			for (Session session : viewObject.sessionsArray) {
 				if (BCBSharedPrefUtils.getAlarmSettingsForID(context,
 						session.id) == BCBSharedPrefUtils.ALARM_SET) {
-					descText += seperatorText + count++ + ") \""
-							+ session.title + "\" By " + session.presenter
-							+ " @" + session.location;
+					descText += seperatorText + "- \"" + session.title
+							+ "\" By " + session.presenter + " @"
+							+ session.location;
 					seperatorText = "\n";
 				}
 			}

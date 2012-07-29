@@ -14,7 +14,7 @@
     <string name="choose_app">Choose an App</string>
     <string name="share_using">Share Using…</string>
     <string name="message_hint">type your message here…</string>
-    <string name="app_title_text">BARCAMP BANGALORE 12</string>
+    <string name="app_title_text">Barcamp Bangalore 12 " "</string>
     <string name="about_message">Its been around five years now since Bangalore 
         saw its first Barcamp. Over this period, the city’s flagship technology unconference
         has brought together hundreds of professionals who have participated in dozens of
@@ -41,5 +41,9 @@
     <string name="when">"When : "</string>
     <string name="where_">Where :</string>
     <string name="presented_by">Presented By</string>
+    <string name="when_where">When &amp; Where</string>
+    <string name="sampletext">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+    <string name="by_user">By user</string>
+    <string name="at_symbol"> \@ </string>
 
 </resources>

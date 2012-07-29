@@ -2,32 +2,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/list_background_drawable"
-    android:orientation="vertical"
-    android:paddingBottom="10dp"
-    android:paddingTop="10dp" >
+    android:background="@drawable/session_list_item_background_drawable"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="10dp" 
+    android:gravity="center_vertical">
 
-    <TextView
-        android:id="@android:id/text1"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:textColor="@color/session_text_color"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_weight="1" 
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@android:id/text2"
-        android:layout_width="fill_parent"
+        <TextView
+            android:id="@android:id/text1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:text="Text1"
+            android:textColor="@color/slot_item_title_color"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@android:id/text2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:text="Text2"
+            android:textColor="@color/slot_item_desc_color"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="sans" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingBottom="10dp"
-        android:paddingLeft="10dp"
-        android:textColor="@color/session_text_color"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:typeface="sans" />
+        android:src="@drawable/ic_action_right_arrow" 
+        android:layout_gravity="right|center_vertical"/>
 
 </LinearLayout>

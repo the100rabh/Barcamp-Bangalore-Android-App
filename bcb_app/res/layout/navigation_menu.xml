@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/navigation_background"
+    android:background="@drawable/navgiation_background"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -23,11 +23,12 @@
                 android:id="@+id/imageView1"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/agenda_button" />
+                android:src="@drawable/agenda" />
 
             <TextView
                 android:id="@+id/textView1"
                 style="@style/NavigationTextStyle"
+                android:paddingLeft="10dp"
                 android:text="Agenda" />
         </LinearLayout>
 
@@ -57,11 +58,12 @@
                 android:id="@+id/imageView1"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/tweet_icon" />
+                android:src="@drawable/tweet" />
 
             <TextView
                 android:id="@+id/textView1"
                 style="@style/NavigationTextStyle"
+                android:paddingLeft="10dp"
                 android:text="Tweets" />
         </LinearLayout>
 
@@ -91,11 +93,13 @@
                 android:id="@+id/imageView1"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/update_icon" />
+                android:src="@drawable/updates" />
 
             <TextView
                 android:id="@+id/textView1"
                 style="@style/NavigationTextStyle"
+                android:paddingLeft="10dp"
+                android:shadowColor="@android:color/black"
                 android:text="Updates" />
         </LinearLayout>
 
@@ -126,11 +130,12 @@
                 android:id="@+id/imageView1"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/venue_icon" />
+                android:src="@drawable/venue" />
 
             <TextView
                 android:id="@+id/textView1"
                 style="@style/NavigationTextStyle"
+                android:paddingLeft="10dp"
                 android:text="Venue" />
         </LinearLayout>
 
@@ -160,11 +165,12 @@
                 android:id="@+id/imageView1"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/about_button" />
+                android:src="@drawable/about" />
 
             <TextView
                 android:id="@+id/textView1"
                 style="@style/NavigationTextStyle"
+                android:paddingLeft="10dp"
                 android:text="About" />
         </LinearLayout>
 
@@ -194,11 +200,12 @@
                 android:id="@+id/imageView1"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/share_icon" />
+                android:src="@drawable/share" />
 
             <TextView
                 android:id="@+id/textView1"
                 style="@style/NavigationTextStyle"
+                android:paddingLeft="10dp"
                 android:text="Share" />
         </LinearLayout>
 
@@ -228,11 +235,12 @@
                 android:id="@+id/imageView1"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/settings_icon" />
+                android:src="@drawable/settings" />
 
             <TextView
                 android:id="@+id/textView1"
                 style="@style/NavigationTextStyle"
+                android:paddingLeft="10dp"
                 android:text="Settings" />
         </LinearLayout>
     </LinearLayout>

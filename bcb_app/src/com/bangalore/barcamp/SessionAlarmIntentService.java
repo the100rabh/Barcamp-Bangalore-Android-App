@@ -96,9 +96,7 @@ public class SessionAlarmIntentService extends IntentService {
 			// the next two lines initialize the Notification, using the
 			// configurations above
 			Notification notification = new Notification(icon, tickerText, when);
-			notification.flags |= Notification.DEFAULT_LIGHTS
-					| Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE
-					| Notification.FLAG_AUTO_CANCEL;
+			notification.flags |= Notification.FLAG_AUTO_CANCEL;
 			notification.setLatestEventInfo(context, contentTitle, contentText,
 					contentIntent);
 

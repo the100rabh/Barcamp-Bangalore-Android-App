@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
+    android:background="@drawable/background"
+    android:orientation="vertical" >
 
     <com.markupartist.android.widget.ActionBar
         android:id="@+id/actionBar1"
@@ -28,8 +30,17 @@
         android:id="@+id/listView1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/list_background"
+        android:layout_margin="10dp"
+        android:background="@drawable/list_background_drawable"
+        android:cacheColorHint="#0000"
         android:clickable="true"
+        android:divider="#0000"
+        android:dividerHeight="0dp"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:listSelector="@drawable/list_background_drawable"
+        android:paddingTop="10dp"
+        android:scrollbars="none"
         android:visibility="gone"
         tools:listitem="@android:layout/simple_list_item_1" >
 
