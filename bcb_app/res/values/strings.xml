@@ -4,8 +4,8 @@
     <string name="hello">Hello World, BarcampBangaloreSplashApp!</string>
     <string name="app_name">Barcamp Bangalore</string>
     <string name="session">Sessions</string>
-    <string name="tweets">TWEETS</string>
-    <string name="about">ABOUT</string>
+    <string name="tweets">Tweets</string>
+    <string name="about">About</string>
     <string name="bcb_updates">BCB Updates</string>
     <string name="connection_error_and_try_again">Connection Error!! Check if you have internet connectivity and try again.</string>
     <string name="ok">OK</string>
@@ -31,9 +31,9 @@
 		interaction among participants like last time.\n\n
 		Head to http://barcampbangalore.org for more info.    </string>
     <string name="notification_settings_text">Notification (Will check for updates every 10mins)</string>
-    <string name="agenda">AGENDA</string>
-    <string name="updates">UPDATES</string>
-    <string name="venue">VENUE</string>
+    <string name="agenda">Agenda</string>
+    <string name="updates">Updates</string>
+    <string name="venue">Venue</string>
     <string name="alert_me_10_mins_before_start">"   "Alert before this session start</string>
     <string name="share_now">Share Now</string>
     <string name="no_session">Slow down buddy\n\nNo sessions registered for this slot yet.\n\nPlease come back again</string>
@@ -45,5 +45,7 @@
     <string name="sampletext">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
     <string name="by_user">By user</string>
     <string name="at_symbol"> \@ </string>
+    <string name="share">Share</string>
+    <string name="settings">Settings</string>
 
 </resources>

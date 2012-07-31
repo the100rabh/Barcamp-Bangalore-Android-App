@@ -92,7 +92,7 @@ public class WebViewActivity extends BCBActivityBaseClass {
 
 			@Override
 			public int getDrawable() {
-				return R.drawable.refresh_icon;
+				return R.drawable.refresh;
 			}
 		}, 0);
 

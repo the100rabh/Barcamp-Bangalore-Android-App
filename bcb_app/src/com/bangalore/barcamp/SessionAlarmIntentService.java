@@ -54,7 +54,7 @@ public class SessionAlarmIntentService extends IntentService {
 			retVal = true;
 		}
 		if (retVal) {
-			int icon = R.drawable.app_logo; // icon from resources
+			int icon = R.drawable.bcb_logo; // icon from resources
 			CharSequence tickerText = "Session Alert"; // ticker-text
 			long when = System.currentTimeMillis(); // notification time
 			CharSequence contentTitle = "My notification"; // message title
@@ -90,8 +90,8 @@ public class SessionAlarmIntentService extends IntentService {
 						+ session.location;
 			}
 
-			PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-					notificationIntent, 0);
+			PendingIntent contentIntent = PendingIntent.getActivity(this,
+					Integer.parseInt(sessionID), notificationIntent, 0);
 
 			// the next two lines initialize the Notification, using the
 			// configurations above

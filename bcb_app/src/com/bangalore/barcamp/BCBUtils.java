@@ -91,10 +91,15 @@ public class BCBUtils {
 		actionbar.setTitle(R.string.app_title_text);
 		TextView logo = (TextView) activity.findViewById(R.id.actionbar_title);
 		Shader textShader = new LinearGradient(0, 0, 0, 20, new int[] {
-				Color.WHITE, Color.GRAY }, new float[] { 0, 1 }, TileMode.CLAMP);
+				Color.WHITE, 0xff999999 }, new float[] { 0, 1 }, TileMode.CLAMP);
 		logo.getPaint().setShader(textShader);
-		logo.getPaint().setShadowLayer(1, 2, 2, Color.BLACK);
+		actionbar.setOnTitleClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+
+			}
+		});
 		// ******** End of Action Bar configuration
 
 	}

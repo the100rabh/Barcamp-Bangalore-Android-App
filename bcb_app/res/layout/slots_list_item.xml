@@ -35,7 +35,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"            
-            android:orientation="vertical" >
+            android:orientation="vertical" 
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical">
 
             <TextView
                 android:id="@+id/slot_title"
@@ -43,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:text="Slot Title"
                 android:textColor="@color/slot_right_pane_text_color"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -61,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right|center_vertical"
             android:contentDescription="Session"
-            android:src="@drawable/ic_action_right_arrow" />
+            android:src="@drawable/right_arrow" />
 
     </LinearLayout>
 

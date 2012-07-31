@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1" 
         android:orientation="vertical">
-
+
         <TextView
             android:id="@android:id/text1"
             android:layout_width="fill_parent"
@@ -24,9 +24,9 @@
             android:paddingTop="10dp"
             android:text="Text1"
             android:textColor="@color/slot_item_title_color"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
-
+
         <TextView
             android:id="@android:id/text2"
             android:layout_width="fill_parent"
@@ -36,16 +36,17 @@
             android:paddingLeft="10dp"
             android:text="Text2"
             android:textColor="@color/slot_item_desc_color"
-            android:textSize="16sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             android:typeface="sans" />
+
     </LinearLayout>
 
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_action_right_arrow" 
+        android:src="@drawable/right_arrow" 
         android:layout_gravity="right|center_vertical"/>
 
 </LinearLayout>

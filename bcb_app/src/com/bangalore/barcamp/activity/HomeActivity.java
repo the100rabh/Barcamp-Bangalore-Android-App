@@ -22,8 +22,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,11 +36,6 @@ public class HomeActivity extends BCBActivityBaseClass {
 	protected static final int START_SCHEDULE = 100;
 	protected static final int ABOUT_ACTIVITY_REQUEST = 101;
 	protected static final int BCB_TWITTER_UPDATES_ACTIVITY_REQUEST = 102;
-	public Handler generalHandler = new Handler() {
-		public void handleMessage(Message msg) {
-
-		}
-	};
 
 	/** Called when the activity is first created. */
 	@Override

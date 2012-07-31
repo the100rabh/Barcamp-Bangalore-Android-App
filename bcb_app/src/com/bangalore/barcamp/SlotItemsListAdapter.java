@@ -18,7 +18,6 @@ package com.bangalore.barcamp;
 
 import java.util.List;
 
-import android.R;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,8 +49,10 @@ public class SlotItemsListAdapter extends ArrayAdapter<Session> {
 			convertView = layoutInflaterService.inflate(listViewResource, null);
 
 			holder = new ViewHolder();
-			holder.text1 = (TextView) convertView.findViewById(R.id.text1);
-			holder.text2 = (TextView) convertView.findViewById(R.id.text2);
+			holder.text1 = (TextView) convertView
+					.findViewById(android.R.id.text1);
+			holder.text2 = (TextView) convertView
+					.findViewById(android.R.id.text2);
 			convertView.setTag(holder);
 		} else
 			holder = (ViewHolder) convertView.getTag();
