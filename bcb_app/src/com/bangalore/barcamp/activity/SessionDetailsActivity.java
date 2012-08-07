@@ -146,7 +146,7 @@ public class SessionDetailsActivity extends BCBActivityBaseClass {
 					dismissDialog(SHOW_ERROR_DIALOG);
 					SessionDetailsActivity.this.finish();
 					Intent intent = new Intent(SessionDetailsActivity.this,
-							HomeActivity.class);
+							ScheduleActivity.class);
 					startActivity(intent);
 				}
 			});

@@ -35,7 +35,6 @@ import android.widget.TextView;
 import com.bangalore.barcamp.BCBSharedPrefUtils;
 import com.bangalore.barcamp.BCBUtils;
 import com.bangalore.barcamp.R;
-import com.markupartist.android.widget.ActionBar;
 
 public class ShareActivity extends BCBActivityBaseClass {
 	@Override
@@ -44,8 +43,6 @@ public class ShareActivity extends BCBActivityBaseClass {
 		setContentView(R.layout.share_screen);
 		BCBUtils.createActionBarOnActivity(this);
 		BCBUtils.addNavigationActions(this);
-		ActionBar actionbar = (ActionBar) findViewById(R.id.actionBar1);
-		// actionbar.removeActionAt(0);
 		((EditText) findViewById(R.id.editText1))
 				.addTextChangedListener(new TextWatcher() {
 

@@ -34,7 +34,7 @@ import android.util.Log;
 
 import com.bangalore.barcamp.BCBSharedPrefUtils;
 import com.bangalore.barcamp.R;
-import com.bangalore.barcamp.activity.HomeActivity;
+import com.bangalore.barcamp.activity.ScheduleActivity;
 
 public class UpdatesIntentService extends IntentService {
 
@@ -70,7 +70,7 @@ public class UpdatesIntentService extends IntentService {
 					break;
 				}
 
-				int icon = R.drawable.app_logo; // icon from resources
+				int icon = R.drawable.bcb_logo; // icon from resources
 				CharSequence tickerText = "Barcamp Bangalore Updates"; // ticker-text
 				long when = 0;// item.getPubDate().getTime(); // notification
 								// time
@@ -79,7 +79,7 @@ public class UpdatesIntentService extends IntentService {
 				CharSequence contentText = item.getTitle(); // message text
 
 				Intent notificationIntent = new Intent(getApplicationContext(),
-						HomeActivity.class);
+						ScheduleActivity.class);
 
 				notificationIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				PendingIntent notificationPendingIntent = PendingIntent

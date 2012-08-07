@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/session_background"
+    android:background="@drawable/background"
     android:orientation="vertical" >
 
     <com.markupartist.android.widget.ActionBar
@@ -13,8 +13,7 @@
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:background="@drawable/background">
+        android:layout_height="wrap_content" >
 
         <LinearLayout
             android:id="@+id/linearLayout1"

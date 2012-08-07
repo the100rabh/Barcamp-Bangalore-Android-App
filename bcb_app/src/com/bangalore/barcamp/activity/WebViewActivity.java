@@ -39,6 +39,23 @@ public class WebViewActivity extends BCBActivityBaseClass {
 	WebView webView;
 
 	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		String newUrl = intent.getStringExtra(URL);
+		String url = getIntent().getStringExtra(URL);
+		if (!newUrl.equals(url)) {
+			setIntent(intent);
+			findViewById(R.id.linearLayout2).setVisibility(View.VISIBLE);
+			webView.setVisibility(View.GONE);
+			webView.loadUrl(newUrl);
+			if (slidingMenu.isMenuOpen()) {
+				toggle();
+			}
+		}
+
+	}
+
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.webview);

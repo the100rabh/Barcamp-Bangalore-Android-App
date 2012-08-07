@@ -16,8 +16,6 @@
 
 package com.bangalore.barcamp;
 
-import java.io.BufferedReader;
-
 import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -45,7 +43,6 @@ public class SessionAlarmIntentService extends IntentService {
 	protected void onHandleIntent(Intent intent) {
 		Log.e("SessionAlarmIntentService", " Service called ");
 		boolean retVal = false;
-		BufferedReader in = null;
 		Context context = getApplicationContext(); // application Context
 		if (((BarcampBangalore) context).getBarcampData() == null) {
 			retVal = BCBUtils

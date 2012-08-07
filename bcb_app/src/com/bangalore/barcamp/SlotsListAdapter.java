@@ -18,14 +18,12 @@ public class SlotsListAdapter extends ArrayAdapter<Slot> {
 
 	private LayoutInflater layoutInflaterService;
 	private Context context;
-	private List<Slot> slotsArray;
 
 	public SlotsListAdapter(Context context, List<Slot> slotsArray) {
 		super(context, R.layout.slots_list_item, slotsArray);
 		this.layoutInflaterService = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		this.context = context;
-		this.slotsArray = slotsArray;
 	}
 
 	@Override
@@ -56,12 +54,16 @@ public class SlotsListAdapter extends ArrayAdapter<Slot> {
 		holder.arrow.setVisibility(View.GONE);
 		if (viewObject.type.equals(Slot.SESSION)) {
 			holder.arrow.setVisibility(View.VISIBLE);
+			holder.time
+					.setBackgroundResource(R.drawable.slot_time_background_drawable);
+		} else {
+			holder.time
+					.setBackgroundResource(R.drawable.slot_time_fixed_background_drawable);
 		}
 		if (holder.desc != null) {
 			holder.desc.setVisibility(View.GONE);
 			String descText = "";
 			String seperatorText = "";
-			int count = 1;
 			for (Session session : viewObject.sessionsArray) {
 				if (BCBSharedPrefUtils.getAlarmSettingsForID(context,
 						session.id) == BCBSharedPrefUtils.ALARM_SET) {

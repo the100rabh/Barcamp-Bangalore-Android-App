@@ -40,6 +40,7 @@
         android:headerDividersEnabled="false"
         android:listSelector="@drawable/list_background_drawable"
         android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:scrollbars="none"
         android:visibility="gone"
         tools:listitem="@android:layout/simple_list_item_1" >

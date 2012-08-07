@@ -5,10 +5,22 @@
     android:versionCode="2"
     android:versionName="2.0" >
 
-    <uses-sdk android:minSdkVersion="8"/>
+    <uses-sdk android:minSdkVersion="8" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission
+        android:name="com.bangalore.barcamp.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.bangalore.barcamp.permission.C2D_MESSAGE" />
+
+    <!-- This app has permission to register and receive data message. -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <supports-screens
         android:anyDensity="true"
@@ -16,6 +28,7 @@
         android:normalScreens="true"
         android:resizeable="true"
         android:smallScreens="true" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".data.BarcampBangalore"
@@ -36,8 +49,12 @@
         <activity android:name=".activity.SlotDetailsActivity" />
         <activity android:name=".activity.SessionDetailsActivity" />
         <activity android:name=".activity.HomeActivity" />
-        <activity android:name=".activity.ShareActivity" />
-        <activity android:name=".activity.WebViewActivity" />
+        <activity
+            android:name=".activity.ShareActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.WebViewActivity"
+            android:launchMode="singleTask" />
         <activity
             android:name=".activity.AboutActivity"
             android:launchMode="singleTask" />
@@ -45,6 +62,18 @@
 
         <service android:name="SessionAlarmIntentService" />
         <service android:name=".service.UpdatesIntentService" />
+        <service android:name=".gcm.GCMIntentService" />
+        
+        <receiver
+            android:name=".gcm.GCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="com.bangalore.barcamp" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

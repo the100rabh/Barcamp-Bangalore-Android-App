@@ -15,28 +15,41 @@
  */
 package com.bangalore.barcamp.activity;
 
+import static com.bangalore.barcamp.gcm.CommonUtilities.SENDER_ID;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.channels.FileChannel;
 import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.bangalore.barcamp.BCBSharedPrefUtils;
 import com.bangalore.barcamp.BCBUtils;
 import com.bangalore.barcamp.R;
 import com.bangalore.barcamp.SlotsListAdapter;
+import com.bangalore.barcamp.data.BCBUpdatesMessage;
 import com.bangalore.barcamp.data.BarcampBangalore;
 import com.bangalore.barcamp.data.BarcampData;
 import com.bangalore.barcamp.data.Slot;
+import com.bangalore.barcamp.database.MessagesDataSource;
+import com.bangalore.barcamp.gcm.GCMUtils;
 import com.markupartist.android.widget.ActionBar;
 import com.markupartist.android.widget.ActionBar.Action;
 
@@ -49,11 +62,14 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 	private static final String BCB_DATA = "BCBData";
 	private static final String LIST_POS = "ListPos";
 
+	AsyncTask<Void, Void, Void> mRegisterTask;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.schedule);
+
 		BCBUtils.createActionBarOnActivity(this);
 		BCBUtils.addNavigationActions(this);
 
@@ -87,6 +103,53 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 				return R.drawable.refresh;
 			}
 		}, 0);
+
+		if (!GCMUtils.isRegistered(this)) {
+			Intent registrationIntent = new Intent(
+					"com.google.android.c2dm.intent.REGISTER");
+			// sets the app name in the intent
+			registrationIntent.putExtra("app",
+					PendingIntent.getBroadcast(this, 0, new Intent(), 0));
+			registrationIntent.putExtra("sender", SENDER_ID);
+			startService(registrationIntent);
+		}
+
+		MessagesDataSource ds = new MessagesDataSource(getApplicationContext());
+		ds.open();
+		List<BCBUpdatesMessage> list = ds.getAllMessages();
+		ds.close();
+
+		// so db backup here
+		try {
+			File sd = Environment.getExternalStorageDirectory();
+			File data1 = Environment.getDataDirectory();
+
+			if (sd.canWrite()) {
+				String currentDBPath = "//data//" + getPackageName()
+						+ "//databases//" + "messages.db";
+				String backupDBPath = "messages.db";
+				File currentDB = new File(data1, currentDBPath);
+				File backupDB = new File(sd, backupDBPath);
+
+				FileChannel src = new FileInputStream(currentDB).getChannel();
+				FileChannel dst = new FileOutputStream(backupDB).getChannel();
+				dst.transferFrom(src, 0, src.size());
+				src.close();
+				dst.close();
+				Toast.makeText(this, "Database backup complete",
+						Toast.LENGTH_LONG).show();
+
+			}
+		} catch (Exception e) {
+
+			Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+
+		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
 	}
 
 	private void addScheduleItems(List<Slot> slotsArray) {
@@ -213,6 +276,10 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		if (BCBSharedPrefUtils.getScheduleUpdated(this)) {
+			((BarcampBangalore) getApplicationContext()).setBarcampData(null);
+			BCBSharedPrefUtils.setScheduleUpdated(this, false);
+		}
 		BarcampData data = ((BarcampBangalore) getApplicationContext())
 				.getBarcampData();
 		if (data == null) {
@@ -226,5 +293,4 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 			addScheduleItems(data.slotsArray);
 		}
 	}
-
 }
