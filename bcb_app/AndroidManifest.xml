@@ -28,7 +28,6 @@
         android:normalScreens="true"
         android:resizeable="true"
         android:smallScreens="true" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".data.BarcampBangalore"
@@ -58,10 +57,12 @@
         <activity
             android:name=".activity.AboutActivity"
             android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.UpdateMessagesActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".activity.SettingsActivity" />
 
         <service android:name="SessionAlarmIntentService" />
-        <service android:name=".service.UpdatesIntentService" />
         <service android:name=".gcm.GCMIntentService" />
         
         <receiver

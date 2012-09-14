@@ -17,10 +17,6 @@ package com.bangalore.barcamp.activity;
 
 import static com.bangalore.barcamp.gcm.CommonUtilities.SENDER_ID;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.nio.channels.FileChannel;
 import java.util.List;
 
 import android.app.Activity;
@@ -31,24 +27,24 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
+import android.text.Html;
+import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.bangalore.barcamp.BCBSharedPrefUtils;
 import com.bangalore.barcamp.BCBUtils;
 import com.bangalore.barcamp.R;
 import com.bangalore.barcamp.SlotsListAdapter;
-import com.bangalore.barcamp.data.BCBUpdatesMessage;
 import com.bangalore.barcamp.data.BarcampBangalore;
 import com.bangalore.barcamp.data.BarcampData;
 import com.bangalore.barcamp.data.Slot;
-import com.bangalore.barcamp.database.MessagesDataSource;
 import com.bangalore.barcamp.gcm.GCMUtils;
 import com.markupartist.android.widget.ActionBar;
 import com.markupartist.android.widget.ActionBar.Action;
@@ -61,6 +57,7 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 	private static final int SHOW_ERROR_DIALOG = 100;
 	private static final String BCB_DATA = "BCBData";
 	private static final String LIST_POS = "ListPos";
+	public static final String FROM_NOTIFICATION = "FromNotification";
 
 	AsyncTask<Void, Void, Void> mRegisterTask;
 
@@ -91,7 +88,7 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 				if (task == null) {
 					findViewById(R.id.spinnerLayout)
 							.setVisibility(View.VISIBLE);
-					// findViewById(R.id.scrollView1).setVisibility(View.GONE);
+					findViewById(R.id.infoText).setVisibility(View.GONE);
 					findViewById(R.id.listView1).setVisibility(View.GONE);
 					task = new FetchScheduleAsyncTask();
 					task.execute();
@@ -114,37 +111,9 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 			startService(registrationIntent);
 		}
 
-		MessagesDataSource ds = new MessagesDataSource(getApplicationContext());
-		ds.open();
-		List<BCBUpdatesMessage> list = ds.getAllMessages();
-		ds.close();
-
-		// so db backup here
-		try {
-			File sd = Environment.getExternalStorageDirectory();
-			File data1 = Environment.getDataDirectory();
-
-			if (sd.canWrite()) {
-				String currentDBPath = "//data//" + getPackageName()
-						+ "//databases//" + "messages.db";
-				String backupDBPath = "messages.db";
-				File currentDB = new File(data1, currentDBPath);
-				File backupDB = new File(sd, backupDBPath);
-
-				FileChannel src = new FileInputStream(currentDB).getChannel();
-				FileChannel dst = new FileOutputStream(backupDB).getChannel();
-				dst.transferFrom(src, 0, src.size());
-				src.close();
-				dst.close();
-				Toast.makeText(this, "Database backup complete",
-						Toast.LENGTH_LONG).show();
-
-			}
-		} catch (Exception e) {
-
-			Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
-
+		if (getIntent().getBooleanExtra(FROM_NOTIFICATION, false)) {
 		}
+
 	}
 
 	@Override
@@ -227,9 +196,7 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 				BarcampData data = ((BarcampBangalore) getApplicationContext())
 						.getBarcampData();
 				if (data != null) {
-					findViewById(R.id.spinnerLayout).setVisibility(View.GONE);
-					findViewById(R.id.listView1).setVisibility(View.VISIBLE);
-					addScheduleItems(data.slotsArray);
+					updateViews(data);
 				}
 				if (!result) {
 					// failure
@@ -285,12 +252,26 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 		if (data == null) {
 			findViewById(R.id.spinnerLayout).setVisibility(View.VISIBLE);
 			findViewById(R.id.listView1).setVisibility(View.GONE);
+			findViewById(R.id.infoText).setVisibility(View.GONE);
 			task = new FetchScheduleAsyncTask();
 			task.execute();
 		} else {
-			findViewById(R.id.spinnerLayout).setVisibility(View.GONE);
+			updateViews(data);
+		}
+	}
+
+	private void updateViews(BarcampData data) {
+		findViewById(R.id.spinnerLayout).setVisibility(View.GONE);
+		if (TextUtils.isEmpty(data.status)) {
 			findViewById(R.id.listView1).setVisibility(View.VISIBLE);
 			addScheduleItems(data.slotsArray);
+			findViewById(R.id.infoText).setVisibility(View.GONE);
+		} else {
+			TextView infoText = ((TextView) findViewById(R.id.infoText));
+			infoText.setMovementMethod(LinkMovementMethod.getInstance());
+			infoText.setText(Html.fromHtml(data.status));
+			infoText.setVisibility(View.VISIBLE);
+			findViewById(R.id.listView1).setVisibility(View.GONE);
 		}
 	}
 }

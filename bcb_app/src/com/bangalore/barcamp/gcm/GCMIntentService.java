@@ -21,12 +21,16 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.PowerManager;
 import android.util.Log;
 
 import com.bangalore.barcamp.BCBSharedPrefUtils;
 import com.bangalore.barcamp.R;
 import com.bangalore.barcamp.activity.ScheduleActivity;
+import com.bangalore.barcamp.activity.UpdateMessagesActivity;
 import com.bangalore.barcamp.database.MessagesDataSource;
 
 public class GCMIntentService extends IntentService {
@@ -88,13 +92,17 @@ public class GCMIntentService extends IntentService {
 			tickerText = "Schedule Updated";
 			Intent notificationIntent = new Intent(this, ScheduleActivity.class);
 			BCBSharedPrefUtils.setScheduleUpdated(this, true);
+			notificationIntent.putExtra(ScheduleActivity.FROM_NOTIFICATION,
+					true);
 
 			PendingIntent contentIntent = PendingIntent.getActivity(this, 100,
 					notificationIntent, 0);
 			// the next two lines initialize the Notification, using the
 			// configurations above
 			Notification notification = new Notification(icon, tickerText, when);
-			notification.flags |= Notification.FLAG_AUTO_CANCEL;
+			notification.flags |= Notification.FLAG_AUTO_CANCEL
+					| Notification.DEFAULT_SOUND
+					| Notification.FLAG_SHOW_LIGHTS;
 			notification.setLatestEventInfo(this, contentTitle, contentText,
 					contentIntent);
 			String ns = Context.NOTIFICATION_SERVICE;
@@ -109,8 +117,38 @@ public class GCMIntentService extends IntentService {
 			String timestamp = String.valueOf(when);
 			ds.createMessage(message, timestamp);
 			ds.close();
-		}
 
+			contentText = message;
+			contentTitle = "BCB Update";
+			tickerText = "Message from BCB";
+			Intent notificationIntent = new Intent(this,
+					UpdateMessagesActivity.class);
+			notificationIntent.putExtra(
+					UpdateMessagesActivity.FROM_NOTIFICATION, true);
+
+			PendingIntent contentIntent = PendingIntent.getActivity(this, 90,
+					notificationIntent, 0);
+			// the next two lines initialize the Notification, using the
+			// configurations above
+			Notification notification = new Notification(icon, tickerText, when);
+			notification.flags |= Notification.FLAG_AUTO_CANCEL
+					| Notification.DEFAULT_SOUND
+					| Notification.FLAG_SHOW_LIGHTS;
+			notification.setLatestEventInfo(this, contentTitle, contentText,
+					contentIntent);
+			String ns = Context.NOTIFICATION_SERVICE;
+			NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);
+			mNotificationManager.notify(90, notification);
+
+		}
+		try {
+			Uri notificationurl = RingtoneManager
+					.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+			Ringtone r = RingtoneManager.getRingtone(getApplicationContext(),
+					notificationurl);
+			r.play();
+		} catch (Exception e) {
+		}
 	}
 
 	private void handleRegistration(Intent intent) {
@@ -143,92 +181,3 @@ public class GCMIntentService extends IntentService {
 		}
 	}
 }
-
-/**
- * {@link IntentService} responsible for handling GCM messages.
- */
-// public class GCMIntentService extends GCMBaseIntentService {
-//
-// @SuppressWarnings("hiding")
-// private static final String TAG = "GCMIntentService";
-//
-// public GCMIntentService() {
-// super(SENDER_ID);
-// }
-//
-// @Override
-// protected void onRegistered(Context context, String registrationId) {
-// Log.i(TAG, "Device registered: regId = " + registrationId);
-// displayMessage(context, "GCM Registered");
-// ServerUtilities.register(context, registrationId);
-// }
-//
-// @Override
-// protected void onUnregistered(Context context, String registrationId) {
-// Log.i(TAG, "Device unregistered");
-// displayMessage(context, "Unregistered");
-// if (GCMRegistrar.isRegisteredOnServer(context)) {
-// ServerUtilities.unregister(context, registrationId);
-// } else {
-// // This callback results from the call to unregister made on
-// // ServerUtilities when the registration to the server failed.
-// Log.i(TAG, "Ignoring unregister callback");
-// }
-// }
-//
-// @Override
-// protected void onMessage(Context context, Intent intent) {
-// Log.i(TAG, "Received message");
-// String message = "Test message";
-// // String message = getString(R.string.gcm_message);
-// displayMessage(context, message);
-// // notifies user
-// generateNotification(context, message);
-// }
-//
-// @Override
-// protected void onDeletedMessages(Context context, int total) {
-// Log.i(TAG, "Received deleted messages notification");
-// String message = "test Message Deleted";
-// // String message = getString(R.string.gcm_deleted, total);
-// // displayMessage(context, message);
-// // notifies user
-// generateNotification(context, message);
-// }
-//
-// @Override
-// public void onError(Context context, String errorId) {
-// Log.i(TAG, "Received error: " + errorId);
-// displayMessage(context, "Error with ID: "+errorId);
-// }
-//
-// @Override
-// protected boolean onRecoverableError(Context context, String errorId) {
-// // log message
-// Log.i(TAG, "Received recoverable error: " + errorId);
-// displayMessage(context, "Error ID " + errorId);
-// return super.onRecoverableError(context, errorId);
-// }
-//
-// /**
-// * Issues a notification to inform the user that server has sent a message.
-// */
-// private static void generateNotification(Context context, String message) {
-// int icon = R.drawable.bcb_logo;
-// long when = System.currentTimeMillis();
-// NotificationManager notificationManager = (NotificationManager)
-// context.getSystemService(Context.NOTIFICATION_SERVICE);
-// Notification notification = new Notification(icon, message, when);
-// String title = context.getString(R.string.app_name);
-// Intent notificationIntent = new Intent(context, ScheduleActivity.class);
-// // set intent so it does not start a new activity
-// notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-// Intent.FLAG_ACTIVITY_SINGLE_TOP);
-// PendingIntent intent =
-// PendingIntent.getActivity(context, 0, notificationIntent, 0);
-// notification.setLatestEventInfo(context, title, message, intent);
-// notification.flags |= Notification.FLAG_AUTO_CANCEL;
-// notificationManager.notify(0, notification);
-// }
-//
-// }

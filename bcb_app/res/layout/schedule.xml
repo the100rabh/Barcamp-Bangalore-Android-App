@@ -10,6 +10,22 @@
         android:id="@+id/actionBar1"
         style="@style/ActionBar" >
     </com.markupartist.android.widget.ActionBar>
+
+    <TextView
+        android:id="@+id/infoText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="@drawable/list_background_drawable"
+        android:padding="10dp"
+        android:text="TextView"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:textColorLink="#ddd"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/spinnerLayout"
@@ -17,7 +33,8 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@color/list_background"
-        android:gravity="center" >
+        android:gravity="center"
+        android:visibility="visible" >
 
         <ProgressBar
             android:id="@+id/progressBar1"
@@ -25,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-
+
     <ListView
         android:id="@+id/listView1"
         android:layout_width="fill_parent"
@@ -39,12 +56,11 @@
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false"
         android:listSelector="@drawable/list_background_drawable"
-        android:paddingTop="10dp"
         android:paddingBottom="10dp"
+        android:paddingTop="10dp"
         android:scrollbars="none"
         android:visibility="gone"
         tools:listitem="@android:layout/simple_list_item_1" >
-
     </ListView>
 
 </LinearLayout>

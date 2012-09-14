@@ -12,7 +12,6 @@
     <color name="slot_right_pane_text_color">#fff</color>
     <color name="navigation_item_text_color">#fff</color>
     <color name="navigation_item_seperator">#88ffffff</color>
-    <color name="session_background">#fff</color>
     <color name="slot_right_pane_secondary_text_color">#929292</color>
     <color name="slot_item_title_color">#fff</color>
     <color name="slot_item_desc_color">#9c9c9c</color>

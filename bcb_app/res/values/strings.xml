@@ -31,7 +31,6 @@
     <string name="agenda">Agenda</string>
     <string name="updates">Updates</string>
     <string name="venue">Venue</string>
-    <string name="alert_me_10_mins_before_start">"   "Alert before this session start</string>
     <string name="share_now">Share Now</string>
     <string name="no_session">Slow down buddy\n\nNo sessions registered for this slot yet.\n\nPlease come back again</string>
     <string name="when_where">When &amp; Where</string>
@@ -40,5 +39,6 @@
     <string name="at_symbol"> \@ </string>
     <string name="share">Share</string>
     <string name="settings">Settings</string>
-
-</resources>
+    <string name="i_am_attending">I am attending</string>
+    <string name="for_barcamp_bangalore">Orignally made for :</string>
+</resources>

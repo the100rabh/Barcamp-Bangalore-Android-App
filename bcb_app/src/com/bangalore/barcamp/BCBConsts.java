@@ -17,5 +17,4 @@
 package com.bangalore.barcamp;
 
 public class BCBConsts {
-
 }

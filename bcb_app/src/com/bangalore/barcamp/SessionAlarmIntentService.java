@@ -22,6 +22,10 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.PowerManager;
 import android.util.Log;
 
 import com.bangalore.barcamp.activity.SessionDetailsActivity;
@@ -35,12 +39,25 @@ public class SessionAlarmIntentService extends IntentService {
 	public final static String EXTRA_SESSION_POSITION = "session_position";
 	public final static String EXTRA_SLOT_POS = "slotPosition";
 
+	private static PowerManager.WakeLock sWakeLock;
+	private static final Object LOCK = SessionAlarmIntentService.class;
+
 	public SessionAlarmIntentService() {
 		super("SessionAlarmIntentService");
 	}
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
+
+		synchronized (LOCK) {
+			if (sWakeLock == null) {
+				PowerManager pm = (PowerManager) this
+						.getSystemService(Context.POWER_SERVICE);
+				sWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+						"my_wakelock");
+			}
+		}
+		sWakeLock.acquire();
 		Log.e("SessionAlarmIntentService", " Service called ");
 		boolean retVal = false;
 		Context context = getApplicationContext(); // application Context
@@ -93,7 +110,9 @@ public class SessionAlarmIntentService extends IntentService {
 			// the next two lines initialize the Notification, using the
 			// configurations above
 			Notification notification = new Notification(icon, tickerText, when);
-			notification.flags |= Notification.FLAG_AUTO_CANCEL;
+			notification.flags |= Notification.FLAG_AUTO_CANCEL
+					| Notification.DEFAULT_SOUND
+					| Notification.FLAG_SHOW_LIGHTS;
 			notification.setLatestEventInfo(context, contentTitle, contentText,
 					contentIntent);
 
@@ -101,6 +120,15 @@ public class SessionAlarmIntentService extends IntentService {
 			NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);
 			mNotificationManager.notify(Integer.parseInt(sessionID),
 					notification);
+			try {
+				Uri notificationurl = RingtoneManager
+						.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+				Ringtone r = RingtoneManager.getRingtone(
+						getApplicationContext(), notificationurl);
+				r.play();
+			} catch (Exception e) {
+			}
+
 		}
 	}
 }

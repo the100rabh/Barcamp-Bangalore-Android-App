@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="fill_parent"
     android:background="@drawable/navgiation_background" >
 
@@ -235,7 +235,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/nav_settings"
+                android:id="@+id/nav_BCB"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/navigation_item_background_drawable"
@@ -245,20 +245,24 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="left|center_vertical"
+                    android:orientation="horizontal"
                     android:paddingLeft="10dp"
-                    android:paddingTop="5dp" >
-
-                    <ImageView
-                        android:id="@+id/imageView7"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/settings" />
+                    android:paddingRight="10dp" >
 
                     <TextView
                         android:id="@+id/textView7"
                         style="@style/NavigationTextStyle"
-                        android:paddingLeft="10dp"
-                        android:text="@string/settings" />
+                        android:layout_weight="1"
+                        android:text="@string/for_barcamp_bangalore"
+                        android:textSize="15sp" 
+                        android:gravity="right"/>
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/logo" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

@@ -9,12 +9,12 @@
         android:id="@+id/actionBar1"
         style="@style/ActionBar" >
     </com.markupartist.android.widget.ActionBar>
-
+
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/bcb11" />
+        android:src="@drawable/logo" />
 
     <TextView
         android:id="@+id/textView1"

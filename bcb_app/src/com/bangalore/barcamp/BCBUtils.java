@@ -47,8 +47,8 @@ import android.widget.TextView;
 import com.bangalore.barcamp.activity.AboutActivity;
 import com.bangalore.barcamp.activity.BCBActivityBaseClass;
 import com.bangalore.barcamp.activity.ScheduleActivity;
-import com.bangalore.barcamp.activity.SettingsActivity;
 import com.bangalore.barcamp.activity.ShareActivity;
+import com.bangalore.barcamp.activity.UpdateMessagesActivity;
 import com.bangalore.barcamp.activity.WebViewActivity;
 import com.bangalore.barcamp.data.BarcampBangalore;
 import com.bangalore.barcamp.data.BarcampData;
@@ -59,6 +59,8 @@ import com.slidingmenu.lib.SlidingMenuActivity;
 
 public class BCBUtils {
 
+	private static final String BARCAMP_SCHEDULE_JSON = "http://barcampbangalore.org/schadmin/android.json";
+	private static final String BCB_LOCATION_MAPS_URL = "http://maps.google.co.in/maps?q=SAP+Labs+India+Pvt.+Ltd.+-+Bangalore&num=1&t=h&vpsrc=6&ie=UTF8&cid=11444560640179826527&ll=12.978192,77.715204&spn=0.013591,0.022595&z=16&iwloc=A";
 	protected static final int START_SCHEDULE = 100;
 	protected static final int START_ABOUT = 101;
 	protected static final int START_SETTINGS = 102;
@@ -90,8 +92,8 @@ public class BCBUtils {
 
 		actionbar.setTitle(R.string.app_title_text);
 		TextView logo = (TextView) activity.findViewById(R.id.actionbar_title);
-		Shader textShader = new LinearGradient(0, 0, 0, 20, new int[] {
-				Color.WHITE, 0xff999999 }, new float[] { 0, 1 }, TileMode.CLAMP);
+		Shader textShader = new LinearGradient(0, 0, 0, logo.getHeight(),
+				new int[] { Color.WHITE, 0xff999999 }, null, TileMode.CLAMP);
 		logo.getPaint().setShader(textShader);
 		actionbar.setOnTitleClickListener(new OnClickListener() {
 
@@ -135,8 +137,7 @@ public class BCBUtils {
 		BufferedReader in = null;
 		try {
 			HttpClient client = new DefaultHttpClient();
-			HttpUriRequest request = new HttpGet(
-					"http://barcampbangalore.org/bcb/barcampdata.xml");
+			HttpUriRequest request = new HttpGet(BARCAMP_SCHEDULE_JSON);
 			HttpResponse response = client.execute(request);
 			in = new BufferedReader(new InputStreamReader(response.getEntity()
 					.getContent()));
@@ -148,8 +149,7 @@ public class BCBUtils {
 			}
 			in.close();
 			String page = sb.toString();
-			Log.d("Data", page);
-			BarcampData data = XmlUtils.parseBCBXML(page);
+			BarcampData data = DataProcessingUtils.parseBCBJSON(page);
 			((BarcampBangalore) context).setBarcampData(data);
 			if (data != null) {
 				retVal = true;
@@ -178,7 +178,7 @@ public class BCBUtils {
 			String page = BCBSharedPrefUtils.getAllBCBUpdates(context, null);
 			if (page != null) {
 				BarcampData data;
-				data = XmlUtils.parseBCBXML(page);
+				data = DataProcessingUtils.parseBCBJSON(page);
 				((BarcampBangalore) context).setBarcampData(data);
 			}
 		} catch (Throwable e) {
@@ -219,15 +219,6 @@ public class BCBUtils {
 			}
 		});
 
-		view = homeActivity.findViewById(R.id.nav_settings);
-		view.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(homeActivity, SettingsActivity.class);
-				homeActivity.startActivityForResult(intent, START_SETTINGS);
-			}
-		});
 		view = homeActivity.findViewById(R.id.nav_share);
 		view.setOnClickListener(new OnClickListener() {
 
@@ -253,9 +244,8 @@ public class BCBUtils {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(homeActivity, WebViewActivity.class);
-				intent.putExtra(WebViewActivity.URL,
-						"file:///android_asset/barcamp_updates.html");
+				Intent intent = new Intent(homeActivity,
+						UpdateMessagesActivity.class);
 				homeActivity.startActivityForResult(intent, START_BCB_UPDATES);
 			}
 		});
@@ -266,9 +256,8 @@ public class BCBUtils {
 			public void onClick(View v) {
 				final PackageManager pm = homeActivity.getPackageManager();
 
-				Intent intent = new Intent(
-						Intent.ACTION_VIEW,
-						Uri.parse("http://maps.google.co.in/maps?q=SAP+Labs+India+Pvt.+Ltd.+-+Bangalore&num=1&t=h&vpsrc=6&ie=UTF8&cid=11444560640179826527&ll=12.978192,77.715204&spn=0.013591,0.022595&z=16&iwloc=A"));
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri
+						.parse(BCB_LOCATION_MAPS_URL));
 				final List<ResolveInfo> matches = pm.queryIntentActivities(
 						intent, 0);
 				for (ResolveInfo info : matches) {
@@ -286,5 +275,17 @@ public class BCBUtils {
 				homeActivity.startActivity(intent);
 			}
 		});
+		view = homeActivity.findViewById(R.id.nav_BCB);
+		view.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri
+						.parse("http://barcampbangalore.org"));
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				homeActivity.startActivity(intent);
+			}
+		});
+
 	}
 }

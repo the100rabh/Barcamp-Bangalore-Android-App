@@ -20,9 +20,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp" >
+            android:padding="10dp" >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -62,14 +60,18 @@
                 android:paddingTop="10dp" >
 
                 <TextView
-                    android:id="@+id/textView1"
+                    android:id="@+id/description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
                     android:paddingBottom="20dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="10dp"
-                    android:text="@string/sampletext" />
+                    android:text="@string/sampletext"
+                    android:textColor="#aaa"
+                    android:textColorHint="#aaa"
+                    android:textColorLink="#eee" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -106,6 +108,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
                         android:textColor="#fff"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -121,7 +124,7 @@
                         android:id="@+id/location"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
+                        android:paddingLeft="5dp"
                         android:textColor="#fff"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -135,7 +138,7 @@
                     android:layout_marginTop="10dp"
                     android:paddingBottom="15dp"
                     android:paddingTop="10dp"
-                    android:text="@string/alert_me_10_mins_before_start"
+                    android:text="@string/i_am_attending"
                     android:textColor="#fff" />
             </LinearLayout>
         </LinearLayout>

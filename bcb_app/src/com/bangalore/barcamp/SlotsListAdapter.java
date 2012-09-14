@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2012 Saurabh Minni <http://100rabh.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.bangalore.barcamp;
 
 import java.util.List;
@@ -64,18 +79,20 @@ public class SlotsListAdapter extends ArrayAdapter<Slot> {
 			holder.desc.setVisibility(View.GONE);
 			String descText = "";
 			String seperatorText = "";
-			for (Session session : viewObject.sessionsArray) {
-				if (BCBSharedPrefUtils.getAlarmSettingsForID(context,
-						session.id) == BCBSharedPrefUtils.ALARM_SET) {
-					descText += seperatorText + "- \"" + session.title
-							+ "\" By " + session.presenter + " @"
-							+ session.location;
-					seperatorText = "\n";
+			if (viewObject.type.equals("session")) {
+				for (Session session : viewObject.sessionsArray) {
+					if (BCBSharedPrefUtils.getAlarmSettingsForID(context,
+							session.id) == BCBSharedPrefUtils.ALARM_SET) {
+						descText += seperatorText + "- \"" + session.title
+								+ "\" By " + session.presenter + " @"
+								+ session.location;
+						seperatorText = "\n";
+					}
 				}
-			}
-			if (!TextUtils.isEmpty(descText)) {
-				holder.desc.setText(descText);
-				holder.desc.setVisibility(View.VISIBLE);
+				if (!TextUtils.isEmpty(descText)) {
+					holder.desc.setText(descText);
+					holder.desc.setVisibility(View.VISIBLE);
+				}
 			}
 		}
 		convertView.forceLayout();

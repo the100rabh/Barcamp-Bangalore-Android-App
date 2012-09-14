@@ -37,6 +37,8 @@ import com.bangalore.barcamp.BCBUtils;
 import com.bangalore.barcamp.R;
 
 public class ShareActivity extends BCBActivityBaseClass {
+	public static final String SHARE_STRING = "Share String";
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -65,7 +67,10 @@ public class ShareActivity extends BCBActivityBaseClass {
 										+ (140 - s.length() - 7));
 					}
 				});
-
+		if (getIntent().hasExtra(SHARE_STRING)) {
+			((EditText) findViewById(R.id.editText1)).setText(getIntent()
+					.getStringExtra(SHARE_STRING));
+		}
 		Intent intent = new Intent(Intent.ACTION_SEND);
 		intent.setType("text/plain");
 		final PackageManager pm = getPackageManager();
@@ -109,11 +114,12 @@ public class ShareActivity extends BCBActivityBaseClass {
 								(String) info.loadLabel(pm));
 						intent.putExtra(Intent.EXTRA_TEXT,
 								((EditText) findViewById(R.id.editText1))
-										.getText().toString() + " #bcb11");
+										.getText().toString() + " #bcb12");
 						intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 						startActivity(intent);
 						finish();
+
 					}
 				});
 
