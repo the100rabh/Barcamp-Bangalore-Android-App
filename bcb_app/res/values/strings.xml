@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, BarcampBangaloreSplashApp!</string>
     <string name="app_name">Barcamp Bangalore</string>
-    <string name="session">Sessions</string>
-    <string name="tweets">TWEETS</string>
-    <string name="about">ABOUT</string>
-    <string name="bcb_updates">BCB Updates</string>
+    <string name="tweets">Tweets</string>
+    <string name="about">About</string>
     <string name="connection_error_and_try_again">Connection Error!! Check if you have internet connectivity and try again.</string>
     <string name="ok">OK</string>
     <string name="error_title">Error!!!</string>
@@ -14,7 +11,7 @@
     <string name="choose_app">Choose an App</string>
     <string name="share_using">Share Using…</string>
     <string name="message_hint">type your message here…</string>
-    <string name="app_title_text">BARCAMP BANGALORE 11</string>
+    <string name="app_title_text">Barcamp Bangalore 12 " "</string>
     <string name="about_message">Its been around five years now since Bangalore 
         saw its first Barcamp. Over this period, the city’s flagship technology unconference
         has brought together hundreds of professionals who have participated in dozens of
@@ -31,11 +28,17 @@
 		interaction among participants like last time.\n\n
 		Head to http://barcampbangalore.org for more info.    </string>
     <string name="notification_settings_text">Notification (Will check for updates every 10mins)</string>
-    <string name="agenda">AGENDA</string>
-    <string name="updates">UPDATES</string>
-    <string name="venue">VENUE</string>
-    <string name="alert_me_10_mins_before_start">Alert me 10 mins before start</string>
+    <string name="agenda">Agenda</string>
+    <string name="updates">Updates</string>
+    <string name="venue">Venue</string>
     <string name="share_now">Share Now</string>
     <string name="no_session">Slow down buddy\n\nNo sessions registered for this slot yet.\n\nPlease come back again</string>
-
-</resources>
+    <string name="when_where">When &amp; Where</string>
+    <string name="sampletext">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+    <string name="by_user">By user</string>
+    <string name="at_symbol"> \@ </string>
+    <string name="share">Share</string>
+    <string name="settings">Settings</string>
+    <string name="i_am_attending">I am attending</string>
+    <string name="for_barcamp_bangalore">Orignally made for :</string>
+</resources>

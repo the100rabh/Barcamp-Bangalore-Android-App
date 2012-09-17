@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h1>BCB GCM Send Message Console
+</h1>
+<form id="form1" name="form1" method="post" action="/prepMessage">
+  <p>
+    <label for="messageType">Message Type</label>
+    <select name="messageType" id="messageType">
+      <option value="SCHEDULE_UPDATE">Schedule Updated</option>
+      <option value="NOTIFICATION">General Notification</option>
+    </select>
+  </p>
+  <p>Message:     </p>
+  <blockquote>
+    <blockquote>
+      <p>
+        <textarea name="message" id="message" cols="45" rows="5"></textarea>
+      </p>
+    </blockquote>
+  </blockquote>
+  <p> 
+    <input type="submit" name="submit" id="submit" value="Send Message" />
+  </p>
+</form>
+<p>&nbsp;</p>
+</body>
+</html>

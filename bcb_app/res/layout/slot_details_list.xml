@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#000"
+    android:background="@drawable/webtreats_wood"
     android:orientation="vertical" >
 
     <com.markupartist.android.widget.ActionBar
@@ -14,8 +14,12 @@
         android:id="@+id/listView1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:divider="@drawable/listview_seperator2"
-        android:dividerHeight="2dp" >
+        android:layout_margin="10dp"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none" >
     </ListView>
 
     <TextView

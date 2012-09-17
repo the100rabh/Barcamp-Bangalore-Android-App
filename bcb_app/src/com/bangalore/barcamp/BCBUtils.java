@@ -19,6 +19,7 @@ package com.bangalore.barcamp;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -30,21 +31,42 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
+import android.graphics.Shader.TileMode;
+import android.net.Uri;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-import com.bangalore.barcamp.activity.HomeActivity;
-import com.bangalore.barcamp.activity.SettingsActivity;
+import com.bangalore.barcamp.activity.AboutActivity;
+import com.bangalore.barcamp.activity.BCBActivityBaseClass;
+import com.bangalore.barcamp.activity.ScheduleActivity;
 import com.bangalore.barcamp.activity.ShareActivity;
+import com.bangalore.barcamp.activity.UpdateMessagesActivity;
+import com.bangalore.barcamp.activity.WebViewActivity;
 import com.bangalore.barcamp.data.BarcampBangalore;
 import com.bangalore.barcamp.data.BarcampData;
 import com.markupartist.android.widget.ActionBar;
 import com.markupartist.android.widget.ActionBar.Action;
 import com.markupartist.android.widget.ActionBar.IntentAction;
+import com.slidingmenu.lib.SlidingMenuActivity;
 
 public class BCBUtils {
+
+	private static final String BARCAMP_SCHEDULE_JSON = "http://barcampbangalore.org/schadmin/android.json";
+	private static final String BCB_LOCATION_MAPS_URL = "http://maps.google.co.in/maps?q=SAP+Labs+India+Pvt.+Ltd.+-+Bangalore&num=1&t=h&vpsrc=6&ie=UTF8&cid=11444560640179826527&ll=12.978192,77.715204&spn=0.013591,0.022595&z=16&iwloc=A";
+	protected static final int START_SCHEDULE = 100;
+	protected static final int START_ABOUT = 101;
+	protected static final int START_SETTINGS = 102;
+	protected static final int START_SHARE = 103;
+	protected static final int START_BCB12_TWEETS = 104;
+	protected static final int START_BCB_UPDATES = 105;
 
 	public static void createActionBarOnActivity(final Activity activity) {
 		createActionBarOnActivity(activity, false);
@@ -55,43 +77,31 @@ public class BCBUtils {
 		// ******** Start of Action Bar configuration
 		ActionBar actionbar = (ActionBar) activity
 				.findViewById(R.id.actionBar1);
-		if (!isHome) {
-			actionbar.setHomeLogo(R.drawable.home_icon);
-			actionbar.setHomeAction(new Action() {
-				@Override
-				public void performAction(View view) {
-					Intent intent = new Intent(activity, HomeActivity.class);
-					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					activity.startActivity(intent);
-				}
-
-				@Override
-				public int getDrawable() {
-					return R.drawable.home_icon;
-				}
-			});
-		}
-		actionbar.setTitle(R.string.app_title_text);
-		actionbar.addAction(createShareAction(activity));
-		((TextView) (activity
-				.findViewById(com.markupartist.android.widget.actionbar.R.id.actionbar_title)))
-				.setTypeface(Typeface.create("sans", 0));
-
-		actionbar.addAction(new Action() {
-
+		actionbar.setHomeLogo(R.drawable.home);
+		actionbar.setHomeAction(new Action() {
 			@Override
 			public void performAction(View view) {
-				Intent newIntent = new Intent(activity, SettingsActivity.class);
-				activity.startActivity(newIntent);
+				((SlidingMenuActivity) activity).toggle();
 			}
 
 			@Override
 			public int getDrawable() {
-				return R.drawable.settings_icon;
-
+				return R.drawable.home;
 			}
 		});
 
+		actionbar.setTitle(R.string.app_title_text);
+		TextView logo = (TextView) activity.findViewById(R.id.actionbar_title);
+		Shader textShader = new LinearGradient(0, 0, 0, logo.getHeight(),
+				new int[] { Color.WHITE, 0xff999999 }, null, TileMode.CLAMP);
+		logo.getPaint().setShader(textShader);
+		actionbar.setOnTitleClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+			}
+		});
 		// ******** End of Action Bar configuration
 
 	}
@@ -127,8 +137,7 @@ public class BCBUtils {
 		BufferedReader in = null;
 		try {
 			HttpClient client = new DefaultHttpClient();
-			HttpUriRequest request = new HttpGet(
-					"http://barcampbangalore.org/bcb/barcampdata.xml");
+			HttpUriRequest request = new HttpGet(BARCAMP_SCHEDULE_JSON);
 			HttpResponse response = client.execute(request);
 			in = new BufferedReader(new InputStreamReader(response.getEntity()
 					.getContent()));
@@ -140,8 +149,7 @@ public class BCBUtils {
 			}
 			in.close();
 			String page = sb.toString();
-			Log.d("Data", page);
-			BarcampData data = XmlUtils.parseBCBXML(page);
+			BarcampData data = DataProcessingUtils.parseBCBJSON(page);
 			((BarcampBangalore) context).setBarcampData(data);
 			if (data != null) {
 				retVal = true;
@@ -170,7 +178,7 @@ public class BCBUtils {
 			String page = BCBSharedPrefUtils.getAllBCBUpdates(context, null);
 			if (page != null) {
 				BarcampData data;
-				data = XmlUtils.parseBCBXML(page);
+				data = DataProcessingUtils.parseBCBJSON(page);
 				((BarcampBangalore) context).setBarcampData(data);
 			}
 		} catch (Throwable e) {
@@ -178,4 +186,106 @@ public class BCBUtils {
 		}
 	}
 
+	public static void addNavigationActions(
+			final BCBActivityBaseClass homeActivity) {
+		homeActivity.setBehindContentView(R.layout.navigation_menu);
+		int offset = 100;
+		DisplayMetrics metrics = new DisplayMetrics();
+		homeActivity.getWindow().getWindowManager().getDefaultDisplay()
+				.getMetrics(metrics);
+		offset = ((metrics.widthPixels * 130)) / 480;
+
+		homeActivity.setBehindOffset(offset);
+		homeActivity.setBehindScrollScale(0.5f);
+
+		View view = homeActivity.findViewById(R.id.nav_agenda);
+		view.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(homeActivity, ScheduleActivity.class);
+				homeActivity.startActivityForResult(intent, START_SCHEDULE);
+
+			}
+		});
+
+		view = homeActivity.findViewById(R.id.nav_about);
+		view.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(homeActivity, AboutActivity.class);
+				homeActivity.startActivityForResult(intent, START_ABOUT);
+			}
+		});
+
+		view = homeActivity.findViewById(R.id.nav_share);
+		view.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(homeActivity, ShareActivity.class);
+				homeActivity.startActivityForResult(intent, START_SHARE);
+			}
+		});
+		view = homeActivity.findViewById(R.id.nav_tweets);
+		view.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(homeActivity, WebViewActivity.class);
+				intent.putExtra(WebViewActivity.URL,
+						"file:///android_asset/bcb11_updates.html");
+				homeActivity.startActivityForResult(intent, START_BCB12_TWEETS);
+			}
+		});
+		view = homeActivity.findViewById(R.id.nav_update);
+		view.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(homeActivity,
+						UpdateMessagesActivity.class);
+				homeActivity.startActivityForResult(intent, START_BCB_UPDATES);
+			}
+		});
+		view = homeActivity.findViewById(R.id.nav_venue);
+		view.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				final PackageManager pm = homeActivity.getPackageManager();
+
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri
+						.parse(BCB_LOCATION_MAPS_URL));
+				final List<ResolveInfo> matches = pm.queryIntentActivities(
+						intent, 0);
+				for (ResolveInfo info : matches) {
+					Log.e("MapPackage", info.loadLabel(pm) + " "
+							+ info.activityInfo.packageName + " "
+							+ info.activityInfo.name);
+					if (info.activityInfo.name
+							.equals("com.google.android.maps.MapsActivity")) {
+						intent.setClassName("com.google.android.apps.maps",
+								"com.google.android.maps.MapsActivity");
+					}
+				}
+
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				homeActivity.startActivity(intent);
+			}
+		});
+		view = homeActivity.findViewById(R.id.nav_BCB);
+		view.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri
+						.parse("http://barcampbangalore.org"));
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				homeActivity.startActivity(intent);
+			}
+		});
+
+	}
 }

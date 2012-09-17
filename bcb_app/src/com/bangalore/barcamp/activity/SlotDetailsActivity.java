@@ -15,16 +15,13 @@
  */
 package com.bangalore.barcamp.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.bangalore.barcamp.BCBConsts;
 import com.bangalore.barcamp.BCBUtils;
 import com.bangalore.barcamp.R;
 import com.bangalore.barcamp.SlotItemsListAdapter;
@@ -32,18 +29,18 @@ import com.bangalore.barcamp.data.BarcampBangalore;
 import com.bangalore.barcamp.data.BarcampData;
 import com.bangalore.barcamp.data.Slot;
 
-public class SlotDetailsActivity extends Activity {
+public class SlotDetailsActivity extends BCBActivityBaseClass {
 
 	public static String EXTRA_POS = "pos";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.slot_details_list);
 
 		BCBUtils.createActionBarOnActivity(this);
-		
+		BCBUtils.addNavigationActions(this);
+
 		BarcampData data = ((BarcampBangalore) getApplicationContext())
 				.getBarcampData();
 

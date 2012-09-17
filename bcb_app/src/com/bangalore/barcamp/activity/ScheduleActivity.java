@@ -15,48 +15,60 @@
  */
 package com.bangalore.barcamp.activity;
 
-import java.util.ArrayList;
+import static com.bangalore.barcamp.gcm.CommonUtilities.SENDER_ID;
+
 import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bangalore.barcamp.BCBSharedPrefUtils;
 import com.bangalore.barcamp.BCBUtils;
+import com.bangalore.barcamp.R;
+import com.bangalore.barcamp.SlotsListAdapter;
 import com.bangalore.barcamp.data.BarcampBangalore;
 import com.bangalore.barcamp.data.BarcampData;
 import com.bangalore.barcamp.data.Slot;
-import com.bangalore.barcamp.R;
+import com.bangalore.barcamp.gcm.GCMUtils;
 import com.markupartist.android.widget.ActionBar;
 import com.markupartist.android.widget.ActionBar.Action;
 
-public class ScheduleActivity extends Activity {
+public class ScheduleActivity extends BCBActivityBaseClass {
 
-	private List<Button> buttons = new ArrayList<Button>();
 	private FetchScheduleAsyncTask task = null;
+	private List<Slot> slotsArray;
+	private SlotsListAdapter adapter;
 	private static final int SHOW_ERROR_DIALOG = 100;
-	private static final int HOUR_DISTANCE = 124;
 	private static final String BCB_DATA = "BCBData";
+	private static final String LIST_POS = "ListPos";
+	public static final String FROM_NOTIFICATION = "FromNotification";
+
+	AsyncTask<Void, Void, Void> mRegisterTask;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.schedule);
+
 		BCBUtils.createActionBarOnActivity(this);
+		BCBUtils.addNavigationActions(this);
 
 		BarcampData data = ((BarcampBangalore) getApplicationContext())
 				.getBarcampData();
@@ -76,118 +88,58 @@ public class ScheduleActivity extends Activity {
 				if (task == null) {
 					findViewById(R.id.spinnerLayout)
 							.setVisibility(View.VISIBLE);
-					findViewById(R.id.scrollView1).setVisibility(View.GONE);
+					findViewById(R.id.infoText).setVisibility(View.GONE);
+					findViewById(R.id.listView1).setVisibility(View.GONE);
 					task = new FetchScheduleAsyncTask();
 					task.execute();
-					clearExisitingLayout();
 				}
 			}
 
 			@Override
 			public int getDrawable() {
-				return R.drawable.refresh_icon;
+				return R.drawable.refresh;
 			}
 		}, 0);
 
+		if (!GCMUtils.isRegistered(this)) {
+			Intent registrationIntent = new Intent(
+					"com.google.android.c2dm.intent.REGISTER");
+			// sets the app name in the intent
+			registrationIntent.putExtra("app",
+					PendingIntent.getBroadcast(this, 0, new Intent(), 0));
+			registrationIntent.putExtra("sender", SENDER_ID);
+			startService(registrationIntent);
+		}
+
+		if (getIntent().getBooleanExtra(FROM_NOTIFICATION, false)) {
+		}
+
 	}
 
-	protected void clearExisitingLayout() {
-		((LinearLayout) findViewById(R.id.timeScheduleLayout)).removeAllViews();
-		((LinearLayout) findViewById(R.id.scheduleItemsLayout))
-				.removeAllViews();
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
 	}
 
 	private void addScheduleItems(List<Slot> slotsArray) {
-		boolean isFirst = true;
-		if (slotsArray != null && slotsArray.size() > 0) {
-			LinearLayout layout = (LinearLayout) findViewById(R.id.scheduleItemsLayout);
-			for (Slot slot : slotsArray) {
-				Button button = new Button(this);
-				button.setText(slot.name);
-				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-						LayoutParams.FILL_PARENT, getButtonHeight(slot));
-				if (isFirst) {
-					isFirst = false;
-					int topPadding = 10;
-					final float factor = getResources().getDisplayMetrics().density;
-					if (factor == 1.0) {
-						topPadding += ((((slot.startTime % 100) * 100) / 60) * HOUR_DISTANCE) / 100;
-					} else {
-						topPadding += ((((slot.startTime % 100) * 100) / 60) * HOUR_DISTANCE) / 100 + 1;
-					}
+		ListView listView = (ListView) findViewById(R.id.listView1);
+		adapter = new SlotsListAdapter(this, slotsArray);
+		this.slotsArray = slotsArray;
+		listView.setAdapter(adapter);
+		listView.setOnItemClickListener(new OnItemClickListener() {
 
-					params.setMargins(60, topPadding, 30, 0);
-				} else {
-					params.setMargins(60, 0, 30, 0);
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int pos,
+					long id) {
+				if (ScheduleActivity.this.slotsArray.get(pos).type
+						.equals(Slot.SESSION)) {
+					Intent intent = new Intent(ScheduleActivity.this,
+							SlotDetailsActivity.class);
+					intent.putExtra(SlotDetailsActivity.EXTRA_POS, pos);
+					startActivity(intent);
 				}
-
-				button.setTextColor(Color.WHITE);
-				if (slot.type.compareToIgnoreCase(Slot.SESSION) == 0) {
-					button.setBackgroundResource(R.drawable.schedule_item_session_button);
-					button.setOnClickListener(new SlotItemClickListener(this,
-							slot));
-				} else if (slot.type.compareToIgnoreCase(Slot.FIXED) == 0) {
-					button.setBackgroundResource(R.drawable.schedule_item_fixed_button);
-					button.setClickable(false);
-				} else {
-					continue;
-				}
-				layout.addView(button, params);
-				buttons.add(button);
 			}
-		}
-	}
-
-	private int getButtonHeight(Slot slot) {
-		final float factor = getResources().getDisplayMetrics().density;
-		int startHours = slot.startTime / 100;
-		int startMins = slot.startTime % 100;
-		startMins = (startMins * 100) / 60;
-		int endHours = slot.endTime / 100;
-		int endMins = slot.endTime % 100;
-		endMins = (endMins * 100) / 60;
-		int start = startHours * 100 + startMins;
-		int end = endHours * 100 + endMins;
-		int height = 0;
-		if (factor == 1.0) {
-			height = ((end - start) * HOUR_DISTANCE) / 100;
-		} else {
-			height = ((end - start) * (HOUR_DISTANCE - 1)) / 100;
-		}
-		return height;
-	}
-
-	private void addScheduleLayouts(int startHours, int endHours) {
-		LinearLayout layout = (LinearLayout) findViewById(R.id.timeScheduleLayout);
-		final float factor = getResources().getDisplayMetrics().density;
-		for (int count = startHours; count <= endHours; count++) {
-			ImageView image = new ImageView(this);
-			image.setImageResource(R.drawable.time_line);
-			image.setMinimumHeight(10);
-			image.setPadding(0, 8, 0, 0);
-			LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(
-					LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-			image.setBackgroundColor(android.R.color.transparent);
-			image.setLayoutParams(imageParams);
-			layout.addView(image);
-			TextView textView = new TextView(this);
-
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-					LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-			params.setMargins(5, 0, 0, 0);
-			String timeString = String.valueOf(count);
-			timeString += " hrs";
-			textView.setTextColor(Color.WHITE);
-			if (factor == 1.0) {
-				textView.setTextSize(12);
-				textView.setPadding(0, 0, 0, 94);
-			} else {
-				textView.setTextSize(10);
-				textView.setPadding(0, 0, 0, 86);
-			}
-			textView.setText(timeString);
-			layout.addView(textView, params);
-		}
+		});
 	}
 
 	protected Dialog onCreateDialog(int id) {
@@ -244,17 +196,12 @@ public class ScheduleActivity extends Activity {
 				BarcampData data = ((BarcampBangalore) getApplicationContext())
 						.getBarcampData();
 				if (data != null) {
-					findViewById(R.id.spinnerLayout).setVisibility(View.GONE);
-					findViewById(R.id.scrollView1).setVisibility(View.VISIBLE);
-					int startTime = data.slotsArray.get(0).startTime;
-					int endTime = data.slotsArray
-							.get(data.slotsArray.size() - 1).endTime;
-					addScheduleLayouts(startTime / 100, endTime / 100);
-					addScheduleItems(data.slotsArray);
+					updateViews(data);
 				}
 				if (!result) {
 					// failure
 					showDialog(SHOW_ERROR_DIALOG);
+					findViewById(R.id.progressBar1).setVisibility(View.GONE);
 				}
 			}
 			task = null;
@@ -265,6 +212,8 @@ public class ScheduleActivity extends Activity {
 	protected void onSaveInstanceState(Bundle outState) {
 		outState.putSerializable(BCB_DATA,
 				((BarcampBangalore) getApplicationContext()).getBarcampData());
+		ListView listView = (ListView) findViewById(R.id.listView1);
+		outState.putParcelable(LIST_POS, listView.onSaveInstanceState());
 	}
 
 	@Override
@@ -284,24 +233,45 @@ public class ScheduleActivity extends Activity {
 	}
 
 	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+		((ListView) findViewById(R.id.listView1))
+				.onRestoreInstanceState(savedInstanceState
+						.getParcelable(LIST_POS));
+	}
+
+	@Override
 	protected void onResume() {
 		super.onResume();
+		if (BCBSharedPrefUtils.getScheduleUpdated(this)) {
+			((BarcampBangalore) getApplicationContext()).setBarcampData(null);
+			BCBSharedPrefUtils.setScheduleUpdated(this, false);
+		}
 		BarcampData data = ((BarcampBangalore) getApplicationContext())
 				.getBarcampData();
 		if (data == null) {
 			findViewById(R.id.spinnerLayout).setVisibility(View.VISIBLE);
-			findViewById(R.id.scrollView1).setVisibility(View.GONE);
+			findViewById(R.id.listView1).setVisibility(View.GONE);
+			findViewById(R.id.infoText).setVisibility(View.GONE);
 			task = new FetchScheduleAsyncTask();
 			task.execute();
-		} else if (((LinearLayout) findViewById(R.id.timeScheduleLayout))
-				.getChildCount() == 0) {
-			clearExisitingLayout();
-			findViewById(R.id.spinnerLayout).setVisibility(View.GONE);
-			findViewById(R.id.scrollView1).setVisibility(View.VISIBLE);
-			int startTime = data.slotsArray.get(0).startTime;
-			int endTime = data.slotsArray.get(data.slotsArray.size() - 1).endTime;
-			addScheduleLayouts(startTime / 100, endTime / 100);
+		} else {
+			updateViews(data);
+		}
+	}
+
+	private void updateViews(BarcampData data) {
+		findViewById(R.id.spinnerLayout).setVisibility(View.GONE);
+		if (TextUtils.isEmpty(data.status)) {
+			findViewById(R.id.listView1).setVisibility(View.VISIBLE);
 			addScheduleItems(data.slotsArray);
+			findViewById(R.id.infoText).setVisibility(View.GONE);
+		} else {
+			TextView infoText = ((TextView) findViewById(R.id.infoText));
+			infoText.setMovementMethod(LinkMovementMethod.getInstance());
+			infoText.setText(Html.fromHtml(data.status));
+			infoText.setVisibility(View.VISIBLE);
+			findViewById(R.id.listView1).setVisibility(View.GONE);
 		}
 	}
 }

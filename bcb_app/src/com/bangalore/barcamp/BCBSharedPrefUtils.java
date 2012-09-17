@@ -32,6 +32,7 @@ public class BCBSharedPrefUtils {
 
 	public static final int ALARM_NOT_SET = 0;
 	public static final int ALARM_SET = 1;
+	private static final String BCB_UPDATE_AVAILABLE = "BCBUpdateAvailable";
 
 	public static String getShareSettings(Context context) {
 		SharedPreferences settings = context.getSharedPreferences(
@@ -102,6 +103,20 @@ public class BCBSharedPrefUtils {
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putBoolean(BCB_UPDATE_NOTIFICATION_STATE, val);
 		editor.commit();
+	}
+
+	public static void setScheduleUpdated(Context context, boolean val) {
+		SharedPreferences settings = context.getSharedPreferences(
+				BCB_UPDATES_SHARED_PREF, Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putBoolean(BCB_UPDATE_AVAILABLE, val);
+		editor.commit();
+	}
+
+	public static boolean getScheduleUpdated(Context context) {
+		SharedPreferences settings = context.getSharedPreferences(
+				BCB_UPDATES_SHARED_PREF, Context.MODE_PRIVATE);
+		return settings.getBoolean(BCB_UPDATE_AVAILABLE, false);
 	}
 
 }

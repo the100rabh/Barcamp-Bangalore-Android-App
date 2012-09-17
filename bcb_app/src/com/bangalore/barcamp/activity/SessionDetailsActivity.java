@@ -17,9 +17,7 @@ package com.bangalore.barcamp.activity;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.TimeZone;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -28,14 +26,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
-import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
-import com.bangalore.barcamp.BCBConsts;
 import com.bangalore.barcamp.BCBSharedPrefUtils;
 import com.bangalore.barcamp.BCBUtils;
 import com.bangalore.barcamp.R;
@@ -43,8 +41,10 @@ import com.bangalore.barcamp.data.BarcampBangalore;
 import com.bangalore.barcamp.data.BarcampData;
 import com.bangalore.barcamp.data.Session;
 import com.bangalore.barcamp.data.Slot;
+import com.markupartist.android.widget.ActionBar;
+import com.markupartist.android.widget.ActionBar.IntentAction;
 
-public class SessionDetailsActivity extends Activity {
+public class SessionDetailsActivity extends BCBActivityBaseClass {
 	public final static String EXTRA_SESSION_POSITION = "session_position";
 	public final static String EXTRA_SLOT_POS = "slotPosition";
 	public static final String EXTRA_SESSION_ID = "sessionID";
@@ -53,10 +53,10 @@ public class SessionDetailsActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.session_details);
 
 		BCBUtils.createActionBarOnActivity(this);
+		BCBUtils.addNavigationActions(this);
 		BarcampData data = ((BarcampBangalore) getApplicationContext())
 				.getBarcampData();
 		if (data == null) {
@@ -76,7 +76,12 @@ public class SessionDetailsActivity extends Activity {
 		((TextView) findViewById(R.id.title)).setText(session.title);
 		((TextView) findViewById(R.id.time)).setText(session.time);
 		((TextView) findViewById(R.id.location)).setText(session.location);
-		((TextView) findViewById(R.id.presenter)).setText(session.presenter);
+		((TextView) findViewById(R.id.presenter)).setText("By "
+				+ session.presenter);
+		((TextView) findViewById(R.id.description)).setText(Html
+				.fromHtml(session.description));
+		((TextView) findViewById(R.id.description))
+				.setMovementMethod(LinkMovementMethod.getInstance());
 
 		CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox1);
 		checkBox.setChecked(BCBSharedPrefUtils.getAlarmSettingsForID(this,
@@ -97,26 +102,12 @@ public class SessionDetailsActivity extends Activity {
 					AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 					int hour = slot.startTime / 100;
 					int mins = slot.startTime % 100;
+					Log.e("Session", "hour : " + hour + " mins :" + mins);
 					GregorianCalendar date = new GregorianCalendar(2012,
-							Calendar.FEBRUARY, 11, hour, mins);
-					// date = (GregorianCalendar)
-					// GregorianCalendar.getInstance();
-					TimeZone tm = TimeZone.getDefault();
-					long time = tm.getOffset(date.getTimeInMillis());
-					long timeInMills = date.getTimeInMillis() - 10 * 60 * 1000;// +
-																				// time;
-					long currentTime = System.currentTimeMillis();
-					Log.e("TimeData",
-							"currentTime: " + currentTime + " AlarmSet for "
-									+ timeInMills + " offset: " + time
-									+ " date.getTimeInMillis: "
-									+ date.getTimeInMillis() + " date: "
-									+ date.toString());
+							Calendar.AUGUST, 25, hour, mins);
+					long timeInMills = date.getTimeInMillis() - 300000;
 					alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMills,
 							intent);
-					alarmManager.set(AlarmManager.RTC_WAKEUP,
-							currentTime + 10000, intent);
-
 				} else {
 					BCBSharedPrefUtils.setAlarmSettingsForID(
 							SessionDetailsActivity.this, session.id,
@@ -130,6 +121,16 @@ public class SessionDetailsActivity extends Activity {
 				}
 			}
 		});
+
+		Intent intent = new Intent(this, ShareActivity.class);
+		intent.putExtra(ShareActivity.SHARE_STRING, "I am attending session "
+				+ session.title + " by " + session.presenter + " @"
+				+ session.location + " between " + session.time);
+		IntentAction shareAction = new IntentAction(this, intent,
+				R.drawable.share_icon);
+
+		ActionBar actionbar = (ActionBar) findViewById(R.id.actionBar1);
+		actionbar.addAction(shareAction);
 
 	}
 
@@ -148,7 +149,7 @@ public class SessionDetailsActivity extends Activity {
 					dismissDialog(SHOW_ERROR_DIALOG);
 					SessionDetailsActivity.this.finish();
 					Intent intent = new Intent(SessionDetailsActivity.this,
-							HomeActivity.class);
+							ScheduleActivity.class);
 					startActivity(intent);
 				}
 			});
@@ -156,4 +157,5 @@ public class SessionDetailsActivity extends Activity {
 		}
 		return alertDialog;
 	}
+
 }

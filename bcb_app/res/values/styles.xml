@@ -1,43 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
     <style name="SplashScreenStyle" parent="android:Theme.Light">
         <item name="android:windowNoTitle">true</item>
         <item name="android:background">#fff</item>
     </style>
-    
-    <style name="homeButtonStyle">        
+
+    <style name="homeButtonStyle">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">25dp</item>
         <item name="android:layout_marginBottom">20dp</item>
         <item name="android:layout_marginLeft">30dp</item>
         <item name="android:layout_marginRight">30dp</item>
-        <item name="android:layout_marginTop">20dp</item>    
+        <item name="android:layout_marginTop">20dp</item>
         <item name="android:textSize">20dp</item>
-          
     </style>
-    
-        <style name="ActionBar">
+
+    <style name="ActionBar">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">@dimen/actionbar_height</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:background">@drawable/actionbar_background</item>
     </style>
+
     <style name="ActionBarItem">
         <item name="android:layout_width">@dimen/actionbar_item_width</item>
         <item name="android:layout_height">@dimen/actionbar_height</item>
         <item name="android:padding">5dp</item>
         <item name="android:layout_marginLeft">1px</item>
+        <item name="android:background">@drawable/actionbar_background</item>
     </style>
+
     <style name="ActionBarHomeItem" parent="ActionBarItem">
         <item name="android:layout_marginRight">1px</item>
         <item name="android:layout_marginLeft">0px</item>
     </style>
+
     <style name="ActionBarHomeLogo">
         <item name="android:layout_marginRight">1px</item>
         <item name="android:layout_marginLeft">0px</item>
     </style>
-    <style name="ActionBarProgressBar" parent="@android:style/Widget.ProgressBar.Small">
+
+    <style name="ActionBarProgressBar" parent="@android:style/Widget.ProgressBar.Small"></style>
+
+    <style name="NavigationTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/navigation_item_text_color</item>
     </style>
-    
+
 </resources>
