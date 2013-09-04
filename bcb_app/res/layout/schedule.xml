@@ -10,7 +10,7 @@
         android:id="@+id/actionBar1"
         style="@style/ActionBar" >
     </com.markupartist.android.widget.ActionBar>
-
+
     <TextView
         android:id="@+id/infoText"
         android:layout_width="fill_parent"
@@ -32,7 +32,6 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/list_background"
         android:gravity="center"
         android:visibility="visible" >
 
@@ -48,7 +47,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_margin="10dp"
-        android:background="@drawable/list_background_drawable"
         android:cacheColorHint="#0000"
         android:clickable="true"
         android:divider="#0000"

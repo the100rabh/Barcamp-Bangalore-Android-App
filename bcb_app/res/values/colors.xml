@@ -9,13 +9,13 @@
     <color name="actionbar_background_item_pressed_end">#44ffffff</color>
     <color name="list_background">#1C140D</color>
     <color name="slot_right_pane">#9c000000</color>
-    <color name="slot_right_pane_text_color">#fff</color>
-    <color name="navigation_item_text_color">#fff</color>
+    <color name="slot_right_pane_text_color">#3e3e3e</color>
+    <color name="navigation_item_text_color">#3e3e3e</color>
     <color name="navigation_item_seperator">#88ffffff</color>
     <color name="slot_right_pane_secondary_text_color">#929292</color>
     <color name="slot_item_title_color">#fff</color>
-    <color name="slot_item_desc_color">#9c9c9c</color>
+    <color name="slot_item_desc_color">#3e3e3e</color>
     <color name="session_title_color">#fff</color>
-    <color name="session_author_color">#9c9c9c</color>
+    <color name="session_author_color">#3e3e3e</color>
     
 </resources>

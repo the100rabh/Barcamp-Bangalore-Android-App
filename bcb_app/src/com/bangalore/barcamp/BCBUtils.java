@@ -59,7 +59,9 @@ import com.slidingmenu.lib.SlidingMenuActivity;
 
 public class BCBUtils {
 
-	private static final String BARCAMP_SCHEDULE_JSON = "http://barcampbangalore.org/schadmin/android.json";
+	// private static final String BARCAMP_SCHEDULE_JSON =
+	// "http://barcampbangalore.org/schadmin/android.json";
+	private static final String BARCAMP_SCHEDULE_JSON = "http://192.168.2.3/barcampdata.json";
 	private static final String BCB_LOCATION_MAPS_URL = "http://maps.google.co.in/maps?q=SAP+Labs+India+Pvt.+Ltd.+-+Bangalore&num=1&t=h&vpsrc=6&ie=UTF8&cid=11444560640179826527&ll=12.978192,77.715204&spn=0.013591,0.022595&z=16&iwloc=A";
 	protected static final int START_SCHEDULE = 100;
 	protected static final int START_ABOUT = 101;

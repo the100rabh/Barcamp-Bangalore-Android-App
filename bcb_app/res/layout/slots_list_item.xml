@@ -16,9 +16,10 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:text="8:00 am"
-        android:textColor="#fff" />
+        android:textColor="#000000" />
 
     <LinearLayout
+        android:id="@+id/slot_desc_layout"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_gravity="center_vertical"
