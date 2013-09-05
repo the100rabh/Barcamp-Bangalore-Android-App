@@ -19,6 +19,7 @@
             android:id="@android:id/text1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:background="#fed904"
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
@@ -31,6 +32,7 @@
             android:id="@android:id/text2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:background="#ffffff"
             android:gravity="left"
             android:paddingBottom="10dp"
             android:paddingLeft="10dp"
@@ -46,6 +48,7 @@
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#000000"
         android:src="@drawable/right_arrow" 
         android:layout_gravity="right|center_vertical"/>
 

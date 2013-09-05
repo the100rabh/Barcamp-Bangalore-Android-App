@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bangalore.barcamp.data.Session;
@@ -67,6 +68,7 @@ public class SlotsListAdapter extends ArrayAdapter<Slot> {
 			holder.title.setText(viewObject.name);
 		}
 		holder.arrow.setVisibility(View.GONE);
+
 		if (viewObject.type.equals(Slot.SESSION)) {
 			holder.arrow.setVisibility(View.VISIBLE);
 			holder.time
@@ -74,6 +76,9 @@ public class SlotsListAdapter extends ArrayAdapter<Slot> {
 		} else {
 			holder.time
 					.setBackgroundResource(R.drawable.slot_time_fixed_background_drawable);
+			LinearLayout li = (LinearLayout) convertView
+					.findViewById(R.id.slot_desc_layout);
+			li.setBackgroundResource(R.drawable.slot_desc_fixed_background_drawable);
 		}
 		if (holder.desc != null) {
 			holder.desc.setVisibility(View.GONE);
