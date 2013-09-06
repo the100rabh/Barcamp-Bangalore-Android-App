@@ -16,6 +16,8 @@
 
 package com.bangalore.barcamp;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import android.content.Context;
@@ -26,6 +28,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.bangalore.barcamp.data.Session;
+import com.bangalore.barcamp.widgets.CircularImageView;
 
 public class SlotItemsListAdapter extends ArrayAdapter<Session> {
 
@@ -53,6 +56,9 @@ public class SlotItemsListAdapter extends ArrayAdapter<Session> {
 					.findViewById(android.R.id.text1);
 			holder.text2 = (TextView) convertView
 					.findViewById(android.R.id.text2);
+			holder.image = (CircularImageView) convertView
+					.findViewById(R.id.imageView1);
+
 			convertView.setTag(holder);
 		} else
 			holder = (ViewHolder) convertView.getTag();
@@ -63,6 +69,16 @@ public class SlotItemsListAdapter extends ArrayAdapter<Session> {
 		if (holder.text2 != null) {
 			String text = "By " + session.presenter + " @ " + session.location;
 			holder.text2.setText(text);
+		}
+		if (holder.image != null) {
+			try {
+				holder.image
+						.setImageURL(new URL(
+								"http://1.gravatar.com/avatar/bb6caa13742a331aad8b493034663a64"));
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return convertView;
@@ -94,6 +110,8 @@ public class SlotItemsListAdapter extends ArrayAdapter<Session> {
 		public TextView text2;
 
 		public TextView text1;
+
+		public CircularImageView image;
 
 	}
 

@@ -275,6 +275,42 @@
                     android:background="@color/navigation_item_seperator" >
                 </LinearLayout>
             </LinearLayout>
+            
+            <LinearLayout
+                android:id="@+id/nav_login"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/navigation_item_background_drawable"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="0dp"
+                    android:paddingTop="5dp" >
+
+                    <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/navigation_icon_background"
+                        android:src="@drawable/agenda" />
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        style="@style/NavigationTextStyle"
+                        android:paddingLeft="10dp"
+                        android:text="@string/login" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/navigation_item_seperator" >
+                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/nav_BCB"

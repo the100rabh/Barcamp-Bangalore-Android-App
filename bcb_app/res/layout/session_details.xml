@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/com.bangalore.barcamp"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/background"
@@ -26,29 +27,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/session_title_header"
-                android:orientation="vertical" >
+                android:orientation="horizontal" >
 
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:paddingLeft="10dp"
-                    android:text="Title"
-                    android:textColor="@color/session_title_color"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                <com.bangalore.barcamp.widgets.CircularImageView
+                    android:id="@+id/authorImage"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/right_arrow"
+                    custom:url="http://1.gravatar.com/avatar/8e6841f6e443c2a0ece22809a7fafb1e" />
 
-                <TextView
-                    android:id="@+id/presenter"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="10dp"
-                    android:text="@string/by_user"
-                    android:textColor="@color/session_author_color"
-                    android:textSize="14sp" />
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:paddingLeft="10dp"
+                        android:text="Title"
+                        android:textColor="@color/session_title_color"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/presenter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:text="@string/by_user"
+                        android:textColor="@color/session_author_color"
+                        android:textSize="14sp" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout

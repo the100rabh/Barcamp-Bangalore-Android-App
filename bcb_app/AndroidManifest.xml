@@ -44,6 +44,15 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="android"
+                    android:scheme="bcbapp" />
+            </intent-filter>
         </activity>
         <activity android:name=".activity.SlotDetailsActivity" />
         <activity android:name=".activity.SessionDetailsActivity" />
@@ -64,17 +73,17 @@
 
         <service android:name="SessionAlarmIntentService" />
         <service android:name=".gcm.GCMIntentService" />
-        
+
         <receiver
             android:name=".gcm.GCMBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
                 <category android:name="com.bangalore.barcamp" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>

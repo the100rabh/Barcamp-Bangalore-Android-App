@@ -30,6 +30,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -186,6 +187,7 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
+			BCBUtils.syncUserScheduleData(getApplicationContext());
 			return BCBUtils
 					.updateContextWithBarcampData(getApplicationContext());
 		}
@@ -241,8 +243,21 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 	}
 
 	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		if (intent.getData() != null) {
+			String id = intent.getData().getQueryParameter("id");
+			String sid = intent.getData().getQueryParameter("sid");
+			Log.e("data", "id: " + id + " sid: " + sid);
+			BCBSharedPrefUtils.setUserData(getApplicationContext(), id, sid);
+		}
+		Log.e("data", " No Data");
+	}
+
+	@Override
 	protected void onResume() {
 		super.onResume();
+
 		if (BCBSharedPrefUtils.getScheduleUpdated(this)) {
 			((BarcampBangalore) getApplicationContext()).setBarcampData(null);
 			BCBSharedPrefUtils.setScheduleUpdated(this, false);

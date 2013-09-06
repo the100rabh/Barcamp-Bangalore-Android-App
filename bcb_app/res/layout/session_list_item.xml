@@ -1,55 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:custom="http://schemas.android.com/apk/res/com.bangalore.barcamp"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/session_list_item_background_drawable"
     android:baselineAligned="false"
     android:orientation="horizontal"
     android:layout_marginBottom="10dp"
     android:layout_marginTop="10dp" 
+    android:padding="10dp"
     android:gravity="center_vertical">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" 
-        android:orientation="vertical">
-
         <TextView
             android:id="@android:id/text1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="#fed904"
-            android:paddingBottom="5dp"
-            android:paddingLeft="10dp"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/session_list_item_title_background_drawable"            
+            android:paddingLeft="30dp"
             android:paddingTop="10dp"
+            android:paddingBottom="5dp"
+            android:layout_marginLeft="30dp"
             android:text="Text1"
             android:textColor="@color/slot_item_title_color"
             android:textSize="16sp"
             android:textStyle="bold" />
-
+
         <TextView
             android:id="@android:id/text2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffff"
+            android:layout_below="@android:id/text1"
+            android:background="@drawable/session_list_item_body_background_drawable"
             android:gravity="left"
+            android:paddingTop="5dp"
             android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
+            android:paddingLeft="30dp"
+            android:layout_marginLeft="30dp"
             android:text="Text2"
             android:textColor="@color/slot_item_desc_color"
             android:textSize="12sp"
             android:textStyle="bold"
             android:typeface="sans" />
+      <!--   <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@android:id/text1"
+            android:background="#00000000"
+            android:src="@drawable/right_arrow" />
+ -->
 
-    </LinearLayout>
+         <com.bangalore.barcamp.widgets.CircularImageView
+             android:id="@+id/imageView1"
+             android:layout_width="60dp"
+             android:layout_height="60dp"
+             android:layout_alignParentLeft="true"
+             android:layout_centerVertical="true"
+             android:src="@drawable/right_arrow"
+             custom:url="http://1.gravatar.com/avatar/8e6841f6e443c2a0ece22809a7fafb1e" />
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="#000000"
-        android:src="@drawable/right_arrow" 
-        android:layout_gravity="right|center_vertical"/>
-
-</LinearLayout>
+    </RelativeLayout>

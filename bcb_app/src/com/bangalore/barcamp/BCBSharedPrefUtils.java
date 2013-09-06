@@ -21,8 +21,8 @@ import android.content.SharedPreferences;
 
 public class BCBSharedPrefUtils {
 
-	private static final String ALARM_PREFIX = "BCB11_Alarm_Prefix";
-	private static final String BCB11_ALARMS = "BCB11_Alarm";
+	private static final String ALARM_PREFIX = "BCB14_Alarm_Prefix";
+	private static final String BCB14_ALARMS = "BCB14_Alarm";
 	private static final String BCB_SHARED_PREF = "BCBSharedPreference";
 	private static final String BCB_SHARED_WITH_ITEM = "BCBSharedWithItem";
 	private static final String BCB_LAST_UPDATE_TIME = "BCBLastUpdateTime";
@@ -33,6 +33,8 @@ public class BCBSharedPrefUtils {
 	public static final int ALARM_NOT_SET = 0;
 	public static final int ALARM_SET = 1;
 	private static final String BCB_UPDATE_AVAILABLE = "BCBUpdateAvailable";
+	private static final String BCB_USER_ID = "BCB_USER_ID";
+	private static final String BCB_USER_KEY = "BCB_USER_KEY";
 
 	public static String getShareSettings(Context context) {
 		SharedPreferences settings = context.getSharedPreferences(
@@ -49,13 +51,13 @@ public class BCBSharedPrefUtils {
 	}
 
 	public static int getAlarmSettingsForID(Context context, String id) {
-		SharedPreferences settings = context.getSharedPreferences(BCB11_ALARMS,
+		SharedPreferences settings = context.getSharedPreferences(BCB14_ALARMS,
 				Context.MODE_PRIVATE);
 		return settings.getInt(ALARM_PREFIX + id, ALARM_NOT_SET);
 	}
 
 	public static void setAlarmSettingsForID(Context context, String id, int val) {
-		SharedPreferences settings = context.getSharedPreferences(BCB11_ALARMS,
+		SharedPreferences settings = context.getSharedPreferences(BCB14_ALARMS,
 				Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putInt(ALARM_PREFIX + id, val);
@@ -117,6 +119,27 @@ public class BCBSharedPrefUtils {
 		SharedPreferences settings = context.getSharedPreferences(
 				BCB_UPDATES_SHARED_PREF, Context.MODE_PRIVATE);
 		return settings.getBoolean(BCB_UPDATE_AVAILABLE, false);
+	}
+
+	public static void setUserData(Context context, String id, String key) {
+		SharedPreferences settings = context.getSharedPreferences(
+				BCB_UPDATES_SHARED_PREF, Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putString(BCB_USER_ID, id);
+		editor.putString(BCB_USER_KEY, id);
+		editor.commit();
+	}
+
+	public static String getUserID(Context context) {
+		SharedPreferences settings = context.getSharedPreferences(
+				BCB_UPDATES_SHARED_PREF, Context.MODE_PRIVATE);
+		return settings.getString(BCB_USER_ID, null);
+	}
+
+	public static String getUserKey(Context context) {
+		SharedPreferences settings = context.getSharedPreferences(
+				BCB_UPDATES_SHARED_PREF, Context.MODE_PRIVATE);
+		return settings.getString(BCB_USER_KEY, null);
 	}
 
 }

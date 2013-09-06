@@ -73,6 +73,9 @@ public class SlotsListAdapter extends ArrayAdapter<Slot> {
 			holder.arrow.setVisibility(View.VISIBLE);
 			holder.time
 					.setBackgroundResource(R.drawable.slot_time_background_drawable);
+			LinearLayout li = (LinearLayout) convertView
+					.findViewById(R.id.slot_desc_layout);
+			li.setBackgroundResource(R.drawable.slot_desc_background_drawable);
 		} else {
 			holder.time
 					.setBackgroundResource(R.drawable.slot_time_fixed_background_drawable);

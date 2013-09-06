@@ -28,6 +28,7 @@ import android.text.Html;
 import android.util.Log;
 
 import com.bangalore.barcamp.data.BarcampData;
+import com.bangalore.barcamp.data.BarcampUserScheduleData;
 import com.bangalore.barcamp.data.Session;
 import com.bangalore.barcamp.data.Slot;
 
@@ -96,5 +97,29 @@ public class DataProcessingUtils {
 		}
 
 		return data;
+	}
+
+	public static List<BarcampUserScheduleData> parseBCBScheduleJSON(
+			String jsonString) {
+		JSONObject json;
+		Log.e("DataProcessingUtils", jsonString);
+		List<BarcampUserScheduleData> dataList = new ArrayList<BarcampUserScheduleData>();
+		try {
+			json = (JSONObject) new JSONTokener(jsonString).nextValue();
+			JSONArray dataArray = json.getJSONArray("data");
+
+			for (int iCount = 0; iCount < dataArray.length(); iCount++) {
+				JSONObject object = dataArray.getJSONObject(iCount);
+				BarcampUserScheduleData data = new BarcampUserScheduleData();
+				data.title = object.getString("title");
+				data.id = object.getString("id");
+				dataList.add(data);
+			}
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return dataList;
 	}
 }

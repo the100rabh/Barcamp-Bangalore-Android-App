@@ -15,6 +15,8 @@
  */
 package com.bangalore.barcamp.activity;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -41,6 +43,7 @@ import com.bangalore.barcamp.data.BarcampBangalore;
 import com.bangalore.barcamp.data.BarcampData;
 import com.bangalore.barcamp.data.Session;
 import com.bangalore.barcamp.data.Slot;
+import com.bangalore.barcamp.widgets.CircularImageView;
 import com.markupartist.android.widget.ActionBar;
 import com.markupartist.android.widget.ActionBar.IntentAction;
 
@@ -82,6 +85,14 @@ public class SessionDetailsActivity extends BCBActivityBaseClass {
 				.fromHtml(session.description));
 		((TextView) findViewById(R.id.description))
 				.setMovementMethod(LinkMovementMethod.getInstance());
+		try {
+			((CircularImageView) findViewById(R.id.authorImage))
+					.setImageURL(new URL(
+							"http://1.gravatar.com/avatar/8e6841f6e443c2a0ece22809a7fafb1e"));
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox1);
 		checkBox.setChecked(BCBSharedPrefUtils.getAlarmSettingsForID(this,

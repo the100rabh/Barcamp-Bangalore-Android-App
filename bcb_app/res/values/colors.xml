@@ -17,5 +17,16 @@
     <color name="slot_item_desc_color">#3e3e3e</color>
     <color name="session_title_color">#fff</color>
     <color name="session_author_color">#3e3e3e</color>
+    <color name="slot_time_background_pressed_color">#dddddd</color>
+    <color name="slot_time_background_normal_color">#525252</color>
+    
+    <color name="slot_time_background_stroke_pressed_color">#00ffffff</color>
+    <color name="slot_time_background_stroke_normal_color">#00ffffff</color>
+    
+    <color name="session_slot_title_background_normal_color">#fed904</color>
+    <color name="session_slot_title_background_pressed_color">#E3C207</color>
+    
+    <color name="session_slot_desc_background_normal_color">#ffffff</color>
+    <color name="session_slot_desc_background_pressed_color">#E3E3E3</color>
     
 </resources>

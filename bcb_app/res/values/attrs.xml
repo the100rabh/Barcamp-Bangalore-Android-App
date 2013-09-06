@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
+    <declare-styleable name="circularImageView">
+        <attr name="url" format="string"></attr>
+    </declare-styleable>
+
 </resources>
