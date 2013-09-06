@@ -3,18 +3,18 @@
     <item android:state_pressed="true">
         <shape xmlns:android="http://schemas.android.com/apk/res/android"
             android:shape="rectangle">
-            <corners android:topLeftRadius="10dp" android:bottomLeftRadius="10dp"
-                android:topRightRadius="0dp" android:bottomRightRadius="0dp"/>
-            <solid android:color="#fed904"/>
+            <corners android:topLeftRadius="0dp" android:bottomRightRadius="10dp"
+                android:topRightRadius="10dp" android:bottomLeftRadius="0dp"/>
+            <solid android:color="#2bbd1e"/>
             <stroke android:width="5dp" android:color="#00ffffff"/>
         </shape>
     </item>
     <item>
         <shape xmlns:android="http://schemas.android.com/apk/res/android"
             android:shape="rectangle">
-            <corners android:topLeftRadius="10dp" android:bottomLeftRadius="10dp"
-                android:topRightRadius="0dp" android:bottomRightRadius="0dp"/>
-            <solid android:color="#fed904" />
+            <corners android:topLeftRadius="0dp" android:bottomRightRadius="10dp"
+                android:topRightRadius="10dp" android:bottomLeftRadius="0dp"/>
+            <solid android:color="#2bbd1e" />
             <stroke android:width="5dp" android:color="#00ffffff"/>
         </shape>
     </item>
