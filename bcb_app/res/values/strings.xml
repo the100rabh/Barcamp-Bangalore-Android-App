@@ -11,26 +11,25 @@
     <string name="choose_app">Choose an App</string>
     <string name="share_using">Share Using…</string>
     <string name="message_hint">type your message here…</string>
-    <string name="app_title_text">Barcamp Bangalore Monsoon 13 " "</string>
-    <string name="about_message">Its been around five years now since Bangalore 
-        saw its first Barcamp. Over this period, the city’s flagship technology unconference
-        has brought together hundreds of professionals who have participated in dozens of
-         sessions to share their insights on cutting edge technologies.\n\n
-         
-		With the success of the Barcamp format, we have seen the emergence of several other
-		exciting unconferences targeting a range of technology niches. In this changed
-		context, we are seeking to create a uniquely useful space for geeks to come
-		together while perfectly complementing similar events in the city.\n\n
-		
-		For BCB, we request that participants submit topics prior to the event to
-		ensure that a majority of a session is devoted discussions. We also hope 
-		that BCB’s venue at SAP Labs will encourage spontaneous and open-ended 
-		interaction among participants like last time.\n\n
-		Head to http://barcampbangalore.org for more info.    </string>
+    <string name="app_title_text">Barcamp Bangalore Monsoon 2013</string>
+    <string name="about_message">Barcamp Bangalore is an open event focused around people, ideas and collaboration. There is no fixed format and agenda. If you have an interesting topic to share or want to collaborate with folks with a variety of experience, Barcamp is the place for you.
+\n\n
+Since its inception in Bangalore in 2006, BCB has been a place for awesome people with ideas in their heads to talk and share or just hang out with their peers and friends.You can expect sessions on variety of topics like\n
+  •   Technology\n
+  •   Design\n
+  •   Startups &amp; Entrepreneurship\n
+  •   Business &amp; Management\n
+  •   Photography\n
+  •   User Experience\n
+  •   Your life learnings\n
+  •   and a lot more...\n
+  \n
+  Head to http://barcampbangalore.org for more info.    </string>
     <string name="notification_settings_text">Notification (Will check for updates every 10mins)</string>
     <string name="agenda">Agenda</string>
     <string name="updates">Updates</string>
     <string name="venue">Venue</string>
+    <string name="alert_me_10_mins_before_start">"   "Alert before this session start</string>
     <string name="share_now">Share Now</string>
     <string name="no_session">Slow down buddy\n\nNo sessions registered for this slot yet.\n\nPlease come back again</string>
     <string name="when_where">When &amp; Where</string>
@@ -40,6 +39,9 @@
     <string name="share">Share</string>
     <string name="settings">Settings</string>
     <string name="i_am_attending">I am attending</string>
+    <string name="location_map">Location Map</string>
+    <string name="internal_venue">Venue Map</string>
     <string name="for_barcamp_bangalore">Orignally made for :</string>
     <string name="login">Login</string>
-</resources>
+
+</resources>

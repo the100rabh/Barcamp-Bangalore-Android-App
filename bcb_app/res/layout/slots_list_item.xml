@@ -26,47 +26,51 @@
         android:layout_marginLeft="-10dp"
         android:layout_weight="1"
         android:background="@drawable/slot_desc_background_drawable"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
         android:paddingRight="5dp"
         android:paddingTop="5dp" >
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
             android:paddingTop="5dp" >
 
             <TextView
                 android:id="@+id/slot_title"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Slot Title"
                 android:textColor="@color/slot_right_pane_text_color"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/slot_desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Slot Desc"
-                android:textColor="@color/slot_right_pane_secondary_text_color" />
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="right|center_vertical"
+                android:contentDescription="Session"
+                android:src="@drawable/right_arrow" />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/slot_desc"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:contentDescription="Session"
-            android:src="@drawable/right_arrow" />
+            android:background="@drawable/slot_desc_background"
+            android:layout_marginLeft="3dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:text="Slot Desc"
+            android:textColor="@color/slot_right_pane_secondary_text_color" />
     </LinearLayout>
 
 </LinearLayout>

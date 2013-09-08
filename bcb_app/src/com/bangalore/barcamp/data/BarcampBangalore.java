@@ -16,6 +16,9 @@
 
 package com.bangalore.barcamp.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Application;
 
 public class BarcampBangalore extends Application {
@@ -23,6 +26,8 @@ public class BarcampBangalore extends Application {
 	private static BarcampBangalore irApplicationContext;
 
 	private BarcampData barcampData;
+
+	private List<BarcampUserScheduleData> userSchedule;
 
 	public BarcampBangalore() {
 		if (irApplicationContext == null) {
@@ -38,4 +43,31 @@ public class BarcampBangalore extends Application {
 		barcampData = data;
 	}
 
+	public List<BarcampUserScheduleData> getUserSchedule() {
+		return userSchedule;
+	}
+
+	public void setUserSchedule(List<BarcampUserScheduleData> userSchedule) {
+		this.userSchedule = userSchedule;
+	}
+
+	public void removeSessionFromUserSchedule(String id) {
+		if (userSchedule == null) {
+			userSchedule = new ArrayList<BarcampUserScheduleData>();
+		}
+		for (BarcampUserScheduleData data : userSchedule) {
+			if (data.id.equals(id)) {
+				userSchedule.remove(data);
+			}
+		}
+	}
+
+	public void addSessionToUserSchedule(String id) {
+		BarcampUserScheduleData data = new BarcampUserScheduleData();
+		data.id = id;
+		if (userSchedule == null) {
+			userSchedule = new ArrayList<BarcampUserScheduleData>();
+		}
+		userSchedule.add(data);
+	}
 }

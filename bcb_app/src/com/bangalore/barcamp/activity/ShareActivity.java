@@ -114,7 +114,7 @@ public class ShareActivity extends BCBActivityBaseClass {
 								(String) info.loadLabel(pm));
 						intent.putExtra(Intent.EXTRA_TEXT,
 								((EditText) findViewById(R.id.editText1))
-										.getText().toString() + " #bcb12");
+										.getText().toString() + " #barcampblr");
 						intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 						startActivity(intent);

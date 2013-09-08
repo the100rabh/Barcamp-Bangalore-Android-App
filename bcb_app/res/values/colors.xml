@@ -12,7 +12,7 @@
     <color name="slot_right_pane_text_color">#3e3e3e</color>
     <color name="navigation_item_text_color">#3e3e3e</color>
     <color name="navigation_item_seperator">#88ffffff</color>
-    <color name="slot_right_pane_secondary_text_color">#929292</color>
+    <color name="slot_right_pane_secondary_text_color">#424242</color>
     <color name="slot_item_title_color">#fff</color>
     <color name="slot_item_desc_color">#3e3e3e</color>
     <color name="session_title_color">#fff</color>

@@ -43,9 +43,13 @@ import com.bangalore.barcamp.BCBSharedPrefUtils;
 import com.bangalore.barcamp.BCBUtils;
 import com.bangalore.barcamp.R;
 import com.bangalore.barcamp.SlotsListAdapter;
+import com.bangalore.barcamp.data.BCBUpdatesMessage;
 import com.bangalore.barcamp.data.BarcampBangalore;
 import com.bangalore.barcamp.data.BarcampData;
+import com.bangalore.barcamp.data.BarcampUserScheduleData;
+import com.bangalore.barcamp.data.Session;
 import com.bangalore.barcamp.data.Slot;
+import com.bangalore.barcamp.database.MessagesDataSource;
 import com.bangalore.barcamp.gcm.GCMUtils;
 import com.markupartist.android.widget.ActionBar;
 import com.markupartist.android.widget.ActionBar.Action;
@@ -66,6 +70,10 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
+		if (TextUtils.isEmpty(BCBSharedPrefUtils.getUserID(this))) {
+			startActivity(new Intent(this, LoginActivity.class));
+		}
+
 		setContentView(R.layout.schedule);
 
 		BCBUtils.createActionBarOnActivity(this);
@@ -115,6 +123,37 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 		if (getIntent().getBooleanExtra(FROM_NOTIFICATION, false)) {
 		}
 
+		MessagesDataSource ds = new MessagesDataSource(getApplicationContext());
+		ds.open();
+		List<BCBUpdatesMessage> list = ds.getAllMessages();
+		ds.close();
+
+		// // so db backup here
+		// try {
+		// File sd = Environment.getExternalStorageDirectory();
+		// File data1 = Environment.getDataDirectory();
+		//
+		// if (sd.canWrite()) {
+		// String currentDBPath = "//data//" + getPackageName()
+		// + "//databases//" + "messages.db";
+		// String backupDBPath = "messages.db";
+		// File currentDB = new File(data1, currentDBPath);
+		// File backupDB = new File(sd, backupDBPath);
+		//
+		// FileChannel src = new FileInputStream(currentDB).getChannel();
+		// FileChannel dst = new FileOutputStream(backupDB).getChannel();
+		// dst.transferFrom(src, 0, src.size());
+		// src.close();
+		// dst.close();
+		// Toast.makeText(this, "Database backup complete",
+		// Toast.LENGTH_LONG).show();
+		//
+		// }
+		// } catch (Exception e) {
+		//
+		// Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+		//
+		// }
 	}
 
 	@Override
@@ -188,8 +227,60 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			BCBUtils.syncUserScheduleData(getApplicationContext());
-			return BCBUtils
-					.updateContextWithBarcampData(getApplicationContext());
+			if (BCBUtils.updateContextWithBarcampData(getApplicationContext())) {
+				BarcampData sessionsData = ((BarcampBangalore) getApplicationContext())
+						.getBarcampData();
+				List<BarcampUserScheduleData> schedule = ((BarcampBangalore) getApplicationContext())
+						.getUserSchedule();
+				if (schedule != null && sessionsData != null) {
+					if (sessionsData.slotsArray != null
+							&& !sessionsData.slotsArray.isEmpty()) {
+						for (Slot slot : sessionsData.slotsArray) {
+							if (slot.sessionsArray != null
+									&& !slot.sessionsArray.isEmpty()) {
+								for (Session session : slot.sessionsArray) {
+									boolean foundSessionInSchedule = false;
+									for (BarcampUserScheduleData data : schedule) {
+										if (data.id.equals(session.id)) {
+											foundSessionInSchedule = true;
+											break;
+										}
+									}
+
+									if (foundSessionInSchedule
+											&& BCBSharedPrefUtils
+													.getAlarmSettingsForID(
+															ScheduleActivity.this,
+															session.id) != BCBSharedPrefUtils.ALARM_SET) {
+										BCBUtils.setAlarmForSession(
+												getApplicationContext(),
+												session.id,
+												sessionsData.slotsArray
+														.indexOf(slot),
+												slot.sessionsArray
+														.indexOf(session));
+									} else if (!foundSessionInSchedule
+											&& BCBSharedPrefUtils
+													.getAlarmSettingsForID(
+															ScheduleActivity.this,
+															session.id) == BCBSharedPrefUtils.ALARM_SET) {
+										BCBUtils.removeSessionFromSchedule(
+												getApplicationContext(), slot,
+												session,
+												sessionsData.slotsArray
+														.indexOf(slot),
+												slot.sessionsArray
+														.indexOf(session));
+									}
+
+								}
+							}
+						}
+					}
+				}
+				return true;
+			}
+			return false;
 		}
 
 		@Override
@@ -250,8 +341,8 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 			String sid = intent.getData().getQueryParameter("sid");
 			Log.e("data", "id: " + id + " sid: " + sid);
 			BCBSharedPrefUtils.setUserData(getApplicationContext(), id, sid);
+			BCBSharedPrefUtils.setScheduleUpdated(this, true);
 		}
-		Log.e("data", " No Data");
 	}
 
 	@Override

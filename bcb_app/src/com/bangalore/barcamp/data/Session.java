@@ -28,4 +28,5 @@ public class Session implements Serializable {
 	public int pos;
 	public String id;
 	public String description;
+	public String photo;
 }

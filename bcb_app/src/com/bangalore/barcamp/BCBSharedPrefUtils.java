@@ -35,6 +35,7 @@ public class BCBSharedPrefUtils {
 	private static final String BCB_UPDATE_AVAILABLE = "BCBUpdateAvailable";
 	private static final String BCB_USER_ID = "BCB_USER_ID";
 	private static final String BCB_USER_KEY = "BCB_USER_KEY";
+	private static final String BCB_DATA_NOT_SENT = "BCB_DATA_NOT_SENT";
 
 	public static String getShareSettings(Context context) {
 		SharedPreferences settings = context.getSharedPreferences(
@@ -126,7 +127,7 @@ public class BCBSharedPrefUtils {
 				BCB_UPDATES_SHARED_PREF, Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putString(BCB_USER_ID, id);
-		editor.putString(BCB_USER_KEY, id);
+		editor.putString(BCB_USER_KEY, key);
 		editor.commit();
 	}
 
@@ -140,6 +141,20 @@ public class BCBSharedPrefUtils {
 		SharedPreferences settings = context.getSharedPreferences(
 				BCB_UPDATES_SHARED_PREF, Context.MODE_PRIVATE);
 		return settings.getString(BCB_USER_KEY, null);
+	}
+
+	public static String getDataNotSent(Context context) {
+		SharedPreferences settings = context.getSharedPreferences(
+				BCB_UPDATES_SHARED_PREF, Context.MODE_PRIVATE);
+		return settings.getString(BCB_DATA_NOT_SENT, null);
+	}
+
+	public static void setDataNotSent(Context context, String backup) {
+		SharedPreferences settings = context.getSharedPreferences(
+				BCB_UPDATES_SHARED_PREF, Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putString(BCB_DATA_NOT_SENT, backup);
+		editor.commit();
 	}
 
 }

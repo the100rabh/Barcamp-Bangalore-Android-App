@@ -6,12 +6,11 @@
 
     <ImageView
         android:id="@+id/imageViewShadow"
-        android:layout_width="wrap_content"
+        android:layout_width="10dp"
         android:layout_height="fill_parent"
         android:layout_gravity="right"
         android:layout_marginLeft="3dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/menu_shadow" />
+        android:src="@drawable/dropshadow" />
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -35,7 +34,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="left|center_vertical"
                     android:paddingLeft="0dp"
-                    android:paddingTop="5dp" >
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp" >
 
                     <ImageView
                         android:id="@+id/imageView1"
@@ -49,13 +49,6 @@
                         style="@style/NavigationTextStyle"
                         android:paddingLeft="10dp"
                         android:text="@string/agenda" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/navigation_item_seperator" >
                 </LinearLayout>
             </LinearLayout>
 
@@ -71,6 +64,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left|center_vertical"
                     android:paddingLeft="0dp"
+                    android:paddingBottom="5dp" 
                     android:paddingTop="5dp" >
 
                     <ImageView
@@ -86,13 +80,6 @@
                         android:paddingLeft="10dp"
                         android:text="@string/tweets" />
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/navigation_item_seperator" >
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -107,6 +94,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left|center_vertical"
                     android:paddingLeft="0dp"
+                    android:paddingBottom="5dp" 
                     android:paddingTop="5dp" >
 
                     <ImageView
@@ -123,13 +111,6 @@
                         android:shadowColor="@android:color/black"
                         android:text="@string/updates" />
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/navigation_item_seperator" >
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -144,6 +125,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left|center_vertical"
                     android:paddingLeft="0dp"
+                    android:paddingBottom="5dp" 
                     android:paddingTop="5dp" >
 
                     <ImageView
@@ -160,14 +142,39 @@
                         android:text="@string/venue" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/navigation_item_seperator" >
-                </LinearLayout>
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/nav_internal_venue_map"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/navigation_item_background_drawable"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="0dp"
+                    android:paddingBottom="5dp" 
+                    android:paddingTop="5dp" >
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/navigation_icon_background"
+                        android:src="@drawable/internal_venue_left" />
+
+                    <TextView
+                        android:id="@+id/textView7"
+                        style="@style/NavigationTextStyle"
+                        android:paddingLeft="10dp"
+                        android:text="@string/internal_venue" />
+                </LinearLayout>
+
+            </LinearLayout>
+            
             <LinearLayout
                 android:id="@+id/nav_about"
                 android:layout_width="fill_parent"
@@ -180,6 +187,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left|center_vertical"
                     android:paddingLeft="0dp"
+                    android:paddingBottom="5dp" 
                     android:paddingTop="5dp" >
 
                     <ImageView
@@ -196,12 +204,6 @@
                         android:text="@string/about" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/navigation_item_seperator" >
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -216,6 +218,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left|center_vertical"
                     android:paddingLeft="0dp"
+                    android:paddingBottom="5dp" 
                     android:paddingTop="5dp" >
 
                     <ImageView
@@ -232,12 +235,6 @@
                         android:text="@string/share" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/navigation_item_seperator" >
-                </LinearLayout>
             </LinearLayout>
             
             <LinearLayout
@@ -252,6 +249,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left|center_vertical"
                     android:paddingLeft="0dp"
+                    android:paddingBottom="5dp" 
                     android:paddingTop="5dp" >
 
                     <ImageView
@@ -266,49 +264,6 @@
                         style="@style/NavigationTextStyle"
                         android:paddingLeft="10dp"
                         android:text="@string/settings" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/navigation_item_seperator" >
-                </LinearLayout>
-            </LinearLayout>
-            
-            <LinearLayout
-                android:id="@+id/nav_login"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/navigation_item_background_drawable"
-                android:orientation="vertical" >
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left|center_vertical"
-                    android:paddingLeft="0dp"
-                    android:paddingTop="5dp" >
-
-                    <ImageView
-                        android:id="@+id/imageView8"
-                        android:layout_width="50dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/navigation_icon_background"
-                        android:src="@drawable/agenda" />
-
-                    <TextView
-                        android:id="@+id/textView8"
-                        style="@style/NavigationTextStyle"
-                        android:paddingLeft="10dp"
-                        android:text="@string/login" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/navigation_item_seperator" >
                 </LinearLayout>
             </LinearLayout>
 

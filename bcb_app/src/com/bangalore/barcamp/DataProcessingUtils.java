@@ -78,6 +78,7 @@ public class DataProcessingUtils {
 									jsonSession.getString("title")).toString();
 							session.description = jsonSession
 									.getString("description");
+							session.photo = jsonSession.getString("photo");
 							sessionList.add(session);
 						}
 						slot.sessionsArray = sessionList;

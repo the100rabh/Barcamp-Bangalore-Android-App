@@ -34,7 +34,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_margin="10dp"
-                    android:src="@drawable/right_arrow"
+                    android:src="@drawable/bcb_logo"
                     custom:url="http://1.gravatar.com/avatar/8e6841f6e443c2a0ece22809a7fafb1e" />
 
                 <LinearLayout
@@ -127,7 +127,28 @@
                         android:textColor="#fff"
                         android:textSize="16sp"
                         android:textStyle="bold" />
+                </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/location_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/session_venue_location_background"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="5dp"
+                    android:layout_marginTop="20dp" >
+
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:src="@drawable/internal_venue_left" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -143,6 +164,7 @@
                         android:textColor="#fff"
                         android:textSize="16sp"
                         android:textStyle="bold" />
+
                 </LinearLayout>
 
                 <CheckBox
@@ -153,6 +175,7 @@
                     android:layout_marginTop="10dp"
                     android:paddingBottom="15dp"
                     android:paddingTop="10dp"
+                    android:gravity="left|bottom"
                     android:text="@string/i_am_attending"
                     android:textColor="#000000" />
             </LinearLayout>

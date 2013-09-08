@@ -30,7 +30,7 @@ import android.widget.ImageView;
 
 public class CircularImageView extends ImageView {
 
-	private int borderWidth = 5;
+	private int borderWidth = 4;
 	private int viewWidth;
 	private int viewHeight;
 	private Bitmap image;
@@ -59,48 +59,14 @@ public class CircularImageView extends ImageView {
 	public CircularImageView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		loadingMonitor = new Object();
-		// int count = attrs.getAttributeCount();
-		// for (int iCount = 0; iCount < count; iCount++) {
-		// Log.e("attribute", "Attribute index:" + iCount
-		// + "  Attribute Name:" + attrs.getAttributeName(iCount));
-		// }
-		// try {
-		// setImageURL(new URL(attrs.getAttributeValue(
-		// "http://schemas.android.com/apk/res/com.bangalore.barcamp",
-		// "url")));
-		// } catch (MalformedURLException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// Log.e("url",
-		// "url: "
-		// + attrs.getAttributeValue(
-		// "http://schemas.android.com/apk/res/com.bangalore.barcamp",
-		// "url"));
+
 		setup();
 	}
 
 	public CircularImageView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		loadingMonitor = new Object();
-		// int count = attrs.getAttributeCount();
-		// for (int iCount = 0; iCount < count; iCount++) {
-		// Log.e("attribute", "Attribute index:" + iCount
-		// + "  Attribute Name:" + attrs.getAttributeName(iCount));
-		// }
-		// try {
-		// setImageURL(new URL(attrs.getAttributeValue(
-		// "http://schemas.android.com/apk/res/com.bangalore.barcamp",
-		// "url")));
-		// } catch (MalformedURLException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// Log.e("url",
-		// "url: "
-		// + attrs.getAttributeValue(
-		// "http://schemas.android.com/apk/res/com.bangalore.barcamp",
-		// "url"));
+
 		setup();
 	}
 
@@ -113,7 +79,7 @@ public class CircularImageView extends ImageView {
 		mPainter.setColor(Color.parseColor("#22000000"));
 
 		paintBorder = new Paint();
-		setBorderColor(Color.YELLOW);
+		setBorderColor(Color.parseColor("#fed904"));
 		paintBorder.setAntiAlias(true);
 	}
 
@@ -136,29 +102,6 @@ public class CircularImageView extends ImageView {
 			image = bitmapDrawable.getBitmap();
 	}
 
-	// @SuppressLint("DrawAllocation")
-	// @Override
-	// public void onDraw(Canvas canvas) {
-	// // load the bitmap
-	// loadBitmap();
-	//
-	// // init shader
-	// if (image != null) {
-	// shader = new BitmapShader(Bitmap.createScaledBitmap(image,
-	// canvas.getWidth(), canvas.getHeight(), false),
-	// Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-	// paint.setShader(shader);
-	// int circleCenter = viewWidth / 2;
-	//
-	// // circleCenter is the x or y of the view's center
-	// // radius is the radius in pixels of the cirle to be drawn
-	// // paint contains the shader that will texture the shape
-	// canvas.drawCircle(circleCenter + borderWidth, circleCenter
-	// + borderWidth, circleCenter + borderWidth, paintBorder);
-	// canvas.drawCircle(circleCenter + borderWidth, circleCenter
-	// + borderWidth, circleCenter, paint);
-	// }
-	// }
 	@Override
 	protected void onDraw(Canvas canvas) {
 
@@ -207,8 +150,8 @@ public class CircularImageView extends ImageView {
 		paint.setDither(true);
 		canvas.drawARGB(0, 0, 0, 0);
 		paint.setColor(Color.parseColor("#BAB399"));
-		canvas.drawCircle(sbmp.getWidth() / 2 + 0.7f,
-				sbmp.getHeight() / 2 + 0.7f, sbmp.getWidth() / 2 + 0.1f, paint);
+		canvas.drawCircle(sbmp.getWidth() / 2 + 0.4f,
+				sbmp.getHeight() / 2 + 0.4f, sbmp.getWidth() / 2 + 0.1f, paint);
 		paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
 		canvas.drawBitmap(sbmp, rect, rect, paint);
 
@@ -282,11 +225,6 @@ public class CircularImageView extends ImageView {
 		super.setImageURI(uri);
 	}
 
-	/**
-	 * loads image from given url
-	 * 
-	 * @param url
-	 */
 	public void setImageURL(URL url) {
 		synchronized (loadingMonitor) {
 			cancelLoading();
@@ -382,9 +320,6 @@ public class CircularImageView extends ImageView {
 		}
 	}
 
-	/**
-	 * cancels pending image loading
-	 */
 	public void cancelLoading() {
 		if (loadingMonitor != null) {
 			synchronized (loadingMonitor) {

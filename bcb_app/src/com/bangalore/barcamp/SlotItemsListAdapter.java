@@ -72,9 +72,7 @@ public class SlotItemsListAdapter extends ArrayAdapter<Session> {
 		}
 		if (holder.image != null) {
 			try {
-				holder.image
-						.setImageURL(new URL(
-								"http://1.gravatar.com/avatar/bb6caa13742a331aad8b493034663a64"));
+				holder.image.setImageURL(new URL(session.photo));
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

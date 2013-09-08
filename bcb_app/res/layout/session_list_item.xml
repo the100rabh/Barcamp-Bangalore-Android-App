@@ -58,7 +58,7 @@
              android:layout_height="60dp"
              android:layout_alignParentLeft="true"
              android:layout_centerVertical="true"
-             android:src="@drawable/right_arrow"
+             android:src="@drawable/bcb_logo"
              custom:url="http://1.gravatar.com/avatar/8e6841f6e443c2a0ece22809a7fafb1e" />
 
     </RelativeLayout>

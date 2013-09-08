@@ -17,20 +17,16 @@ package com.bangalore.barcamp.activity;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
-import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -39,6 +35,7 @@ import android.widget.TextView;
 import com.bangalore.barcamp.BCBSharedPrefUtils;
 import com.bangalore.barcamp.BCBUtils;
 import com.bangalore.barcamp.R;
+import com.bangalore.barcamp.SessionAttendingUpdateService;
 import com.bangalore.barcamp.data.BarcampBangalore;
 import com.bangalore.barcamp.data.BarcampData;
 import com.bangalore.barcamp.data.Session;
@@ -88,7 +85,7 @@ public class SessionDetailsActivity extends BCBActivityBaseClass {
 		try {
 			((CircularImageView) findViewById(R.id.authorImage))
 					.setImageURL(new URL(
-							"http://1.gravatar.com/avatar/8e6841f6e443c2a0ece22809a7fafb1e"));
+							"http://1.gravatar.com/avatar/bb6caa13742a331aad8b493034663a64?s=100&d=wavatar&r=G"));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -103,35 +100,39 @@ public class SessionDetailsActivity extends BCBActivityBaseClass {
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 				if (isChecked) {
-					BCBSharedPrefUtils.setAlarmSettingsForID(
-							SessionDetailsActivity.this, session.id,
-							BCBSharedPrefUtils.ALARM_SET);
-					PendingIntent intent = BCBUtils.createPendingIntentForID(
-							SessionDetailsActivity.this, session.id,
+					BCBUtils.removeSessionFromSchedule(getApplicationContext(),
+							slot, session,
 							getIntent().getIntExtra(EXTRA_SLOT_POS, 0),
 							getIntent().getIntExtra(EXTRA_SESSION_POSITION, 0));
-					AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-					int hour = slot.startTime / 100;
-					int mins = slot.startTime % 100;
-					Log.e("Session", "hour : " + hour + " mins :" + mins);
-					GregorianCalendar date = new GregorianCalendar(2012,
-							Calendar.AUGUST, 25, hour, mins);
-					long timeInMills = date.getTimeInMillis() - 300000;
-					alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMills,
-							intent);
 				} else {
-					BCBSharedPrefUtils.setAlarmSettingsForID(
-							SessionDetailsActivity.this, session.id,
-							BCBSharedPrefUtils.ALARM_NOT_SET);
-					PendingIntent intent = BCBUtils.createPendingIntentForID(
-							SessionDetailsActivity.this, session.id,
+					BCBUtils.setAlarmForSession(getApplicationContext(),
+							session.id,
 							getIntent().getIntExtra(EXTRA_SLOT_POS, 0),
 							getIntent().getIntExtra(EXTRA_SESSION_POSITION, 0));
-					AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-					alarmManager.cancel(intent);
 				}
+				Intent newIntent = new Intent(getApplicationContext(),
+						SessionAttendingUpdateService.class);
+				newIntent.putExtra(SessionAttendingUpdateService.SESSION_ID,
+						session.id);
+				newIntent.putExtra(SessionAttendingUpdateService.IS_ATTENDING,
+						isChecked ? "true" : "false");
+				startService(newIntent);
 			}
 		});
+
+		findViewById(R.id.location_layout).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(getApplicationContext(),
+								LocationActivity.class);
+						intent.putExtra(LocationActivity.LOCATION_EXTRA,
+								session.location);
+						startActivity(intent);
+
+					}
+				});
 
 		Intent intent = new Intent(this, ShareActivity.class);
 		intent.putExtra(ShareActivity.SHARE_STRING, "I am attending session "
