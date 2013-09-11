@@ -15,14 +15,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.text.TextUtils;
 import android.util.Log;
 
 public class SessionAttendingUpdateService extends IntentService {
 
 	public static final String SESSION_ID = "SESSION_ID";
 	public static final String IS_ATTENDING = "IS_ATTENDING";
-	private static final String BASE_URL = "http://barcampbangalore.org/bcb/wp-android_helper.php?action=setuserdata&userid=%s&userkey=%s&sessionid=%s&isattending=%s";
+	public static final String BASE_URL = "http://barcampbangalore.org/bcb/wp-android_helper.php?action=setuserdata&userid=%s&userkey=%s&sessionid=%s&isattending=%s";
 
 	public SessionAttendingUpdateService() {
 		super("SessionAttendingUpdateService");
@@ -41,7 +40,6 @@ public class SessionAttendingUpdateService extends IntentService {
 		ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 		if (networkInfo != null && networkInfo.isConnected()) {
-
 			try {
 				HttpClient client = new DefaultHttpClient();
 				HttpUriRequest request = new HttpGet(url);
@@ -59,12 +57,14 @@ public class SessionAttendingUpdateService extends IntentService {
 				Log.e("SessionAttendingUpdateService", "id:" + sessionID
 						+ "  return:" + page);
 				if (!page.equals("success\n")) {
-					saveToSharedPreferences(sessionID, isAttending);
+					BCBSharedPrefUtils.setDataNotSent(getApplicationContext(),
+							sessionID, isAttending);
 				}
 
 			} catch (Throwable e) {
 				e.printStackTrace();
-				saveToSharedPreferences(sessionID, isAttending);
+				BCBSharedPrefUtils.setDataNotSent(getApplicationContext(),
+						sessionID, isAttending);
 			} finally {
 				if (in != null) {
 					try {
@@ -75,18 +75,10 @@ public class SessionAttendingUpdateService extends IntentService {
 				}
 			}
 		} else {
-			saveToSharedPreferences(sessionID, isAttending);
+			BCBSharedPrefUtils.setDataNotSent(getApplicationContext(),
+					sessionID, isAttending);
 		}
 
 	}
 
-	private void saveToSharedPreferences(String sessionID, String isAttending) {
-		String dataNotSent = BCBSharedPrefUtils
-				.getDataNotSent(getApplicationContext());
-		if (!TextUtils.isEmpty(dataNotSent)) {
-			dataNotSent += "/";
-		}
-		dataNotSent += sessionID + "," + isAttending;
-		BCBSharedPrefUtils.setDataNotSent(getApplicationContext(), dataNotSent);
-	}
 }

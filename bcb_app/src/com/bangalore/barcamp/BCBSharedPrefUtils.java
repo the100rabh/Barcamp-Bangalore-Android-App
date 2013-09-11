@@ -18,6 +18,7 @@ package com.bangalore.barcamp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 
 public class BCBSharedPrefUtils {
 
@@ -143,18 +144,34 @@ public class BCBSharedPrefUtils {
 		return settings.getString(BCB_USER_KEY, null);
 	}
 
-	public static String getDataNotSent(Context context) {
-		SharedPreferences settings = context.getSharedPreferences(
-				BCB_UPDATES_SHARED_PREF, Context.MODE_PRIVATE);
-		return settings.getString(BCB_DATA_NOT_SENT, null);
+	private static Object syncObject = new Object();
+
+	public static String getAndClearDataNotSent(Context context) {
+		synchronized (syncObject) {
+			SharedPreferences settings = context.getSharedPreferences(
+					BCB_UPDATES_SHARED_PREF, Context.MODE_PRIVATE);
+			String strData = settings.getString(BCB_DATA_NOT_SENT, null);
+			SharedPreferences.Editor editor = settings.edit();
+			editor.putString(BCB_DATA_NOT_SENT, "");
+			editor.commit();
+			return strData;
+		}
 	}
 
-	public static void setDataNotSent(Context context, String backup) {
-		SharedPreferences settings = context.getSharedPreferences(
-				BCB_UPDATES_SHARED_PREF, Context.MODE_PRIVATE);
-		SharedPreferences.Editor editor = settings.edit();
-		editor.putString(BCB_DATA_NOT_SENT, backup);
-		editor.commit();
+	public static void setDataNotSent(Context context, String sessionID,
+			String isAttending) {
+		synchronized (syncObject) {
+			SharedPreferences settings = context.getSharedPreferences(
+					BCB_UPDATES_SHARED_PREF, Context.MODE_PRIVATE);
+			String dataNotSent = settings.getString(BCB_DATA_NOT_SENT, "");
+			if (!TextUtils.isEmpty(dataNotSent)) {
+				dataNotSent += "/";
+			}
+			dataNotSent += sessionID + "," + isAttending;
+			SharedPreferences.Editor editor = settings.edit();
+			editor.putString(BCB_DATA_NOT_SENT, dataNotSent);
+			editor.commit();
+		}
 	}
 
 }

@@ -23,8 +23,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -42,6 +45,7 @@ import android.widget.TextView;
 import com.bangalore.barcamp.BCBSharedPrefUtils;
 import com.bangalore.barcamp.BCBUtils;
 import com.bangalore.barcamp.R;
+import com.bangalore.barcamp.SessionAttendingUpdateService;
 import com.bangalore.barcamp.SlotsListAdapter;
 import com.bangalore.barcamp.data.BCBUpdatesMessage;
 import com.bangalore.barcamp.data.BarcampBangalore;
@@ -226,6 +230,9 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
+
+			syncUpdatedSessionsData(getApplicationContext());
+
 			BCBUtils.syncUserScheduleData(getApplicationContext());
 			if (BCBUtils.updateContextWithBarcampData(getApplicationContext())) {
 				BarcampData sessionsData = ((BarcampBangalore) getApplicationContext())
@@ -253,8 +260,8 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 															ScheduleActivity.this,
 															session.id) != BCBSharedPrefUtils.ALARM_SET) {
 										BCBUtils.setAlarmForSession(
-												getApplicationContext(),
-												session.id,
+												getApplicationContext(), slot,
+												session,
 												sessionsData.slotsArray
 														.indexOf(slot),
 												slot.sessionsArray
@@ -265,8 +272,8 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 															ScheduleActivity.this,
 															session.id) == BCBSharedPrefUtils.ALARM_SET) {
 										BCBUtils.removeSessionFromSchedule(
-												getApplicationContext(), slot,
-												session,
+												getApplicationContext(),
+												session.id,
 												sessionsData.slotsArray
 														.indexOf(slot),
 												slot.sessionsArray
@@ -281,6 +288,35 @@ public class ScheduleActivity extends BCBActivityBaseClass {
 				return true;
 			}
 			return false;
+		}
+
+		private void syncUpdatedSessionsData(Context context) {
+			ConnectivityManager connectivityManager = (ConnectivityManager) context
+					.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo activeNetInfo = connectivityManager
+					.getActiveNetworkInfo();
+			boolean isConnected = activeNetInfo != null
+					&& activeNetInfo.isConnected();
+			if (isConnected) {
+				String dataNotSent = BCBSharedPrefUtils
+						.getAndClearDataNotSent(context);
+				if (!TextUtils.isEmpty(dataNotSent)) {
+					String[] dataArray = dataNotSent.split("/");
+					for (String data : dataArray) {
+						String[] sessionData = data.split(",");
+						Intent newIntent = new Intent(context,
+								SessionAttendingUpdateService.class);
+						newIntent.putExtra(
+								SessionAttendingUpdateService.SESSION_ID,
+								sessionData[0]);
+						newIntent.putExtra(
+								SessionAttendingUpdateService.IS_ATTENDING,
+								sessionData[1]);
+						context.startService(newIntent);
+					}
+				}
+			}
+
 		}
 
 		@Override

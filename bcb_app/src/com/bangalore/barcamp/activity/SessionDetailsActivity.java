@@ -84,8 +84,7 @@ public class SessionDetailsActivity extends BCBActivityBaseClass {
 				.setMovementMethod(LinkMovementMethod.getInstance());
 		try {
 			((CircularImageView) findViewById(R.id.authorImage))
-					.setImageURL(new URL(
-							"http://1.gravatar.com/avatar/bb6caa13742a331aad8b493034663a64?s=100&d=wavatar&r=G"));
+					.setImageURL(new URL(session.photo));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,12 +99,12 @@ public class SessionDetailsActivity extends BCBActivityBaseClass {
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 				if (isChecked) {
-					BCBUtils.removeSessionFromSchedule(getApplicationContext(),
-							slot, session,
+					BCBUtils.setAlarmForSession(getApplicationContext(), slot,
+							session,
 							getIntent().getIntExtra(EXTRA_SLOT_POS, 0),
 							getIntent().getIntExtra(EXTRA_SESSION_POSITION, 0));
 				} else {
-					BCBUtils.setAlarmForSession(getApplicationContext(),
+					BCBUtils.removeSessionFromSchedule(getApplicationContext(),
 							session.id,
 							getIntent().getIntExtra(EXTRA_SLOT_POS, 0),
 							getIntent().getIntExtra(EXTRA_SESSION_POSITION, 0));

@@ -28,6 +28,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.bangalore.barcamp.R;
+
 public class CircularImageView extends ImageView {
 
 	private int borderWidth = 4;
@@ -226,6 +228,9 @@ public class CircularImageView extends ImageView {
 	}
 
 	public void setImageURL(URL url) {
+		setImageDrawable(getContext().getResources().getDrawable(
+				R.drawable.bcb_logo));
+		invalidate();
 		synchronized (loadingMonitor) {
 			cancelLoading();
 			this.currentLoadingTask = new UrlLoadingTask(this).execute(url);
@@ -254,6 +259,7 @@ public class CircularImageView extends ImageView {
 						options);
 			} else {
 				try {
+					Log.e("imagepath", params[0].toExternalForm());
 					URLConnection con = params[0].openConnection();
 					// can use some more params, i.e. caching directory etc
 					con.setUseCaches(true);
@@ -292,7 +298,7 @@ public class CircularImageView extends ImageView {
 
 		@Override
 		protected void onPostExecute(Bitmap result) {
-			if (!this.isCancelled) {
+			if (!this.isCancelled && result != null) {
 				// hope that call is thread-safe
 				this.updateView.setImageBitmap(result);
 			}
@@ -321,13 +327,9 @@ public class CircularImageView extends ImageView {
 	}
 
 	public void cancelLoading() {
-		if (loadingMonitor != null) {
-			synchronized (loadingMonitor) {
-				if (this.currentLoadingTask != null) {
-					this.currentLoadingTask.cancel(true);
-					this.currentLoadingTask = null;
-				}
-			}
+		if (this.currentLoadingTask != null) {
+			this.currentLoadingTask.cancel(true);
+			this.currentLoadingTask = null;
 		}
 	}
 }

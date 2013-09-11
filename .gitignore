@@ -80,3 +80,5 @@ slidingmenu/library/bin/res/drawable-mdpi/ic_launcher.png
 slidingmenu/library/bin/res/drawable-xhdpi/ic_launcher.png
 slidingmenu/library/gen/com/slidingmenu/lib/BuildConfig.java
 slidingmenu/library/gen/com/slidingmenu/lib/R.java
+actionbar/bin/jarlist.cache
+slidingmenu/library/bin/jarlist.cache
