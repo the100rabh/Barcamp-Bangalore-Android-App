@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.bangalore.barcamp.R;
 
@@ -30,14 +31,19 @@ public class LoginActivity extends Activity {
 						startActivity(intent);
 					}
 				});
+		TextView textView = (TextView) findViewById(R.id.skipLoginButton);
+		// SpannableString content = new
+		// SpannableString(getResources().getString(
+		// R.string.do_not_login));
+		// content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+		// textView.setText(content);
 
-		((Button) findViewById(R.id.skipLoginButton))
-				.setOnClickListener(new OnClickListener() {
+		textView.setOnClickListener(new OnClickListener() {
 
-					@Override
-					public void onClick(View v) {
-						finish();
-					}
-				});
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 	}
 }

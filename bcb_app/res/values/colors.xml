@@ -13,10 +13,10 @@
     <color name="navigation_item_text_color">#3e3e3e</color>
     <color name="navigation_item_seperator">#88ffffff</color>
     <color name="slot_right_pane_secondary_text_color">#424242</color>
-    <color name="slot_item_title_color">#fff</color>
-    <color name="slot_item_desc_color">#3e3e3e</color>
-    <color name="session_title_color">#fff</color>
-    <color name="session_author_color">#3e3e3e</color>
+    <color name="slot_item_title_color">#000</color>
+    <color name="slot_item_desc_color">#454545</color>
+    <color name="session_title_color">#000</color>
+    <color name="session_author_color">#454545</color>
     <color name="slot_time_background_pressed_color">#dddddd</color>
     <color name="slot_time_background_normal_color">#525252</color>
     
@@ -28,5 +28,8 @@
     
     <color name="session_slot_desc_background_normal_color">#ffffff</color>
     <color name="session_slot_desc_background_pressed_color">#E3E3E3</color>
+    
+    <color name="updatelist_top_item">#444</color>
+    <color name="updatelist_below_item">#444</color>
     
 </resources>

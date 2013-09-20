@@ -84,9 +84,9 @@
                     android:paddingRight="10dp"
                     android:paddingTop="10dp"
                     android:text="@string/sampletext"
-                    android:textColor="#aaa"
-                    android:textColorHint="#aaa"
-                    android:textColorLink="#eee" />
+                    android:textColor="#454545"
+                    android:textColorHint="#454545"
+                    android:textColorLink="#999999" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -144,8 +144,8 @@
 
                     <ImageView
                         android:id="@+id/imageView1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:src="@drawable/internal_venue_left" />

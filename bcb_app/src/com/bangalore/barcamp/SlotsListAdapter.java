@@ -18,6 +18,7 @@ package com.bangalore.barcamp;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,12 +77,17 @@ public class SlotsListAdapter extends ArrayAdapter<Slot> {
 			LinearLayout li = (LinearLayout) convertView
 					.findViewById(R.id.slot_desc_layout);
 			li.setBackgroundResource(R.drawable.slot_desc_background_drawable);
+			((TextView) convertView.findViewById(R.id.slot_title))
+					.setTextColor(context.getResources().getColor(
+							R.color.slot_right_pane_text_color));
 		} else {
 			holder.time
 					.setBackgroundResource(R.drawable.slot_time_fixed_background_drawable);
 			LinearLayout li = (LinearLayout) convertView
 					.findViewById(R.id.slot_desc_layout);
 			li.setBackgroundResource(R.drawable.slot_desc_fixed_background_drawable);
+			((TextView) convertView.findViewById(R.id.slot_title))
+					.setTextColor(Color.WHITE);
 		}
 		if (holder.desc != null) {
 			holder.desc.setVisibility(View.GONE);

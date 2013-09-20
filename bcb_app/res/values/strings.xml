@@ -43,5 +43,6 @@ Since its inception in Bangalore in 2006, BCB has been a place for awesome peopl
     <string name="internal_venue">Venue Map</string>
     <string name="for_barcamp_bangalore">Orignally made for :</string>
     <string name="login">Login</string>
+    <string name="do_not_login"><u>I am just trying things out</u></string>
 
 </resources>

@@ -12,7 +12,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/webtreats_wood"
+        android:background="@drawable/background"
         android:orientation="vertical" >
 
         <ImageView
@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/location_map"
-            android:src="@drawable/webtreats_wood" />
+            android:src="@drawable/background_new" />
     </LinearLayout>
 
 </LinearLayout>

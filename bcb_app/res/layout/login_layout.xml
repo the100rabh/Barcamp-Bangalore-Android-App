@@ -24,15 +24,15 @@
         android:layout_marginBottom="30dp"
         />
 
-    <Button
+    <TextView
         android:id="@+id/skipLoginButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="I am just trying things out, not really interested in Barcamp" 
+        android:text="@string/do_not_login" 
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:padding="30dp"
-        android:background="#0000"
+        android:background="#0000"        
         android:textColor="#fff"/>
 
 </LinearLayout>
