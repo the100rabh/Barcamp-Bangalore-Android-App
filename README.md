@@ -4,13 +4,16 @@ This is the Android app I had created for Barcamp Bangalore. The live version of
 
 ## Aim
 
-* View Barcamp sessions schedule
-* Setup reminders for the talks which you want to attend
-* View all tweets related to BCB12
-* View all updates from BCB team
-* Enable and get notifications for BCB
-* Venue details for BCB12
-* Share from inside the app so that you dont have to add the hashtag
+App for Barcamp Bangalore Monsoon 2013. It allows you to.
+
+1. View Barcamp sessions schedule
+2. If you login with your Barcamp Website, you can sync the sessions you marked as attending to the app.
+3. Setup reminders for the talks which you want to attend
+4. View all tweets related to Barcamp Bangalore
+5. View all updates from BCB team sent via push notification
+6. Venue location for Barcamp Bangalore
+7. Internal Venue Map for Barcamp Bangalore
+8. Share from inside the app so that you dont have to add the hashtag
 
 # Dependency
 
@@ -28,7 +31,7 @@ Look into example barcampdata.json file in the same folder
 
 Go ahead do it. 
 
-* Search and replace BCB12 and BCB with your tag. 
+* Search and replace BCB and BCB with your tag. 
 * Also replace the link to get the xml from barcampbangalore's website to your own. 
 * Change the notification message location from barcampbangalore twitter stream to your own
 * Change the venue to your own.
@@ -61,7 +64,7 @@ In short that is;
 Have fun and remember we do this in our spare time so don't be too serious :)
 
 # License
-Copyright (c) 2012 [Saurabh Minni](http://100rabh.com)
+Copyright (c) 2013 [Saurabh Minni](http://100rabh.com)
 
 Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
 One extra thing that we want you do is, let the sliding menu have the message "Originally made for Barcamp bangalore" intact. Though you may shift it anywhere you may want to if your design so warrants.
